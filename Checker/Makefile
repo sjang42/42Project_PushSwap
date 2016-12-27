@@ -5,79 +5,59 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sjang <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/11/26 00:17:36 by sjang             #+#    #+#              #
-#    Updated: 2016/11/26 00:17:37 by sjang            ###   ########.fr        #
+#    Created: 2016/12/26 18:15:36 by sjang             #+#    #+#              #
+#    Updated: 2016/12/26 18:15:37 by sjang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-TARGET1					=	checker
-TARGET2					=	push_swap
+TARGET					=	checker
 
-OBJECTS1				=	swap_operations.o swap_operations_sub.o\
-							check.o get_operators.o\
+OBJECTS					=	usage.o\
+							option.o\
 							fill_stack.o\
-							checker_main.o ft_read_one.o\
-							\
-							stack_sw.o sw_solve_min.o\
-							\
-							solve_quick.o\
-							\
-							ft_quicksort.o\
-							\
+							get_operators.o\
+							check.o\
 							ft_operators.o\
-							\
-							ftssau_deal.o\
-							\
-							solve_send.o
+							main_checker.o\
+							stack_sw.o\
+							swap_operations.o swap_operations_sub.o\
 
-SRC						=	./
-ICL						=	./
+
+SRC						=	../src/
+ICL						=	../include/
 CC						=	gcc
 CFLAG					=
 RM						=	/bin/rm -f
 
 HEADERS					=	$(ICL)main.h $(ICL)swap_base.h
-LIBFT					=	-L./libft -lft
+LIBFT					=	-L../libft -lft
 
 .PHONY					:	clean fclean re
 
-all						:	$(TARGET1)
+all						:	$(TARGET)
 
-$(TARGET1)				:	$(OBJECTS1) $(HEADERS) ./libft/libft.a
-							$(CC) $(CFLAG) -o $@ $(OBJECTS1) $(LIBFT)
+$(TARGET)				:	$(OBJECTS) $(HEADERS) ../libft/libft.a
+							$(CC) $(CFLAG) -o $@ $(OBJECTS) $(LIBFT)
 
-./libft/libft.a			:
-							make -C libft
+%.o						:	$(SRC)%.c
+							$(CC) -c $(CFLAG) $<
 
-.c.o					:
-							$(CC) $(CFLAG) -c $<
-
-checker_main.o			:	$(SRC)checker_main.c $(HEADERS)
+main_checker.o			:	$(SRC)main_checker.c $(HEADERS)
 swap_operations.o		:	$(SRC)swap_operations.c $(HEADERS)
 swap_operations_sub.o	:	$(SRC)swap_operations_sub.c $(HEADERS)
 check.o					:	$(SRC)check.c $(HEADERS)
-calculator.o			:	$(SRC)calculator.c $(HEADERS)
 fill_stack.o			:	$(SRC)fill_stack.c $(HEADERS)
 get_operators.o			:	$(SRC)get_operators.c $(HEADERS)
-ft_read_one.o			:	$(SRC)ft_read_one.c $(HEADERS)
+stack_sw.o				:	$(SRC)stack_sw.c $(HEADERS)
+ft_operators.o			:	$(SRC)ft_operators.c $(HEADERS)
+option.o				:	$(SRC)option.c $(HEADERS)
+usage.o					:	$(SRC)usage.c $(HEADERS)
 
 stack_sw.o				:	$(SRC)stack_sw.c $(HEADERS)
-sw_solve_min.o			:	$(SRC)sw_solve_min.c $(HEADERS)
-
-solve_quick.o			:	$(SRC)solve_quick.c $(HEADERS)
-
-ft_quicksort.o			:	$(SRC)ft_quicksort.c $(HEADERS)
-
-ft_operators.o			:	$(SRC)ft_operators.c $(HEADERS)
-
-ftssau_deal.o			:	$(SRC)ftssau_deal.c $(HEADERS)
-
-solve_send.o			:	$(SRC)solve_send.c $(HEADERS)
-
-
 
 clean					:
-							$(RM) $(OBJECTS1)
+							$(RM) $(OBJECTS)
 fclean					:	clean
-							$(RM) $(TARGET1)
+							$(RM) $(TARGET)
 re						:	fclean all
+
