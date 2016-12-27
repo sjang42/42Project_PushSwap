@@ -10,9 +10,64 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "../include/main.h"
 
-t_sw_operator	ft_decide_operator(char *line)
+static void				ft_read_rest(void)
+{
+	char	buf[300];
+	int		i;
+
+	i = 0;
+	while (read(0, buf, 300))
+	{
+		i = 0;
+		while (i < 300)
+		{
+			if (buf[i] == '\n')
+				return ;
+			i++;
+		}
+	}
+}
+
+static char				*ft_read_one(t_stack *a, t_stack *b,
+									t_operators *op)
+{
+	char	arr[4];
+	char	*ret;
+	int		size;
+
+	ft_bzero(arr, 4);
+	size = read(0, arr, 3);
+	if (size == 0)
+		return (NULL);
+	else if (size == 1)
+	{
+		ft_destroy_operators(&op);
+		ft_stack_destroy(&a);
+		ft_stack_destroy(&b);
+		ft_exit_error("Wrong operator");
+	}
+	if (size != 2 && arr[2] != '\n')
+	{
+		size = read(0, arr + 3, 1);
+		if (size != 0 && arr[3] != '\n')
+		{
+			ft_destroy_operators(&op);
+			ft_stack_destroy(&a);
+			ft_stack_destroy(&b);
+			ft_read_rest();
+			ft_exit_error("Wrong operator");
+		}
+		arr[3] = 0;
+	}
+	else
+		arr[2] = 0;
+	ret = ft_strdup(arr);
+	return (ret);
+}
+
+static t_sw_operator	ft_decide_operator(char *line)
 {
 	if (!line)
 		return (0);
@@ -41,130 +96,31 @@ t_sw_operator	ft_decide_operator(char *line)
 	return (0);
 }
 
-t_operators		*ft_get_operators_cos(t_stack *a, t_stack *b)
+t_operators				*ft_get_operators(t_stack *a, t_stack *b,
+											t_swoptions option)
 {
-	int				i;
-	int				err;
 	char			*line;
-
 	t_operators		*op;
-	t_sw_operator	*tmp;
+	t_sw_operator	oper;
 
-	i = 0;
-	op = (t_operators*)malloc(sizeof(t_operators));
-	op->size = 10;
-	op->operators = (t_sw_operator*)malloc(sizeof(t_sw_operator) * op->size);
-	ft_stack_display_cos(a, b);
-	while ((line = ft_read_one()))
+	op = ft_operators_new(100);
+	if (option & CHECKER_SHOW_OP)
+		ft_stack_display_cos(a, b);
+	while ((line = ft_read_one(a, b, op)))
 	{
-		if (i == op->size)
-		{
-			op->operators = (t_sw_operator*)ft_realloc(op->operators,
-							sizeof(t_sw_operator) * op->size,
-							sizeof(t_sw_operator) * (op->size + 10));
-			op->size += 10;
-		}
-		(op->operators)[i] = ft_decide_operator(line);
-		free(line);
-		if ((op->operators)[i] == 0)
+		oper = ft_decide_operator(line);
+		if (!oper)
 		{
 			ft_destroy_operators(&op);
-			ft_exit_error("Wrong operator");
+			ft_stack_destroy(&a);
+			ft_stack_destroy(&b);
+			ft_exit_error("Wrong Operator");
 		}
-		sw_operate(a, b, (op->operators)[i]);
-		ft_stack_display_cos(a, b);
-		i++;
-	}
-	op->operators = (t_sw_operator*)ft_realloc(op->operators,
-					sizeof(t_sw_operator) * op->size,
-					sizeof(t_sw_operator) * i);
-	op->size = i;
-	return (op);
-}
-
-// t_operators		*ft_get_operators(void)
-// {
-// 	int				i;
-// 	int				err;
-// 	char			*line;
-// 	t_operators		*op;
-
-// 	i = 0;
-// 	op = (t_operators*)malloc(sizeof(t_operators));
-// 	op->size = 10;
-// 	op->operators = (t_sw_operator*)malloc(sizeof(t_sw_operator) * op->size);
-// 	while ((err = get_next_line(0, &line)))
-// 	{
-// 		if (i == op->size)
-// 		{
-// 			op->operators = (t_sw_operator*)realloc(op->operators,
-// 							sizeof(t_sw_operator) * (op->size + 10));
-// 			// op->operators = (t_sw_operator*)ft_realloc(op->operators,
-// 			// 				sizeof(t_sw_operator) * op->size,
-// 			// 				sizeof(t_sw_operator) * (op->size + 10));
-// 			op->size += 10;
-// 		}
-// 		(op->operators)[i] = ft_decide_operator(line);
-// 		free(line);
-// 		if ((op->operators)[i] == 0)
-// 		{
-// 			ft_destroy_operators(&op);
-// 			ft_exit_error("Wrong operator");
-// 		}
-// 		i++;
-// 	}
-// 	op->operators = (t_sw_operator*)realloc(op->operators, sizeof(t_sw_operator) * i);
-
-// 	// op->operators = (t_sw_operator*)ft_realloc(op->operators,
-// 	// 				sizeof(t_sw_operator) * op->size,
-// 	// 				sizeof(t_sw_operator) * i);
-// 	// op->size = i;
-// 	return (op);
-// }
-
-int				ft_display_operators(t_operators *op)
-{
-	size_t i;
-
-	i = 0;
-	while (i < op->idx)
-	{
-		if ((op->operators)[i] == SA)
-			ft_putstr("sa");
-		else if ((op->operators)[i] == SB)
-			ft_putstr("sb");
-		else if ((op->operators)[i] == SS)
-			ft_putstr("ss");
-		else if ((op->operators)[i] == PA)
-			ft_putstr("pa");
-		else if ((op->operators)[i] == PB)
-			ft_putstr("pb");
-		else if ((op->operators)[i] == RA)
-			ft_putstr("ra");
-		else if ((op->operators)[i] == RB)
-			ft_putstr("rb");
-		else if ((op->operators)[i] == RR)
-			ft_putstr("rr");
-		else if ((op->operators)[i] == RRA)
-			ft_putstr("rra");
-		else if ((op->operators)[i] == RRB)
-			ft_putstr("rrb");
-		else if ((op->operators)[i] == RRR)
-			ft_putstr("rrr");
+		if (option & CHECKER_SHOW_OP)
+			ft_op_store_do_show_ch(op, oper, a, b);
 		else
-		{
-			printf("%d\n", (op->operators)[i]);
-			ft_putstr("what the fuck");
-		}
-		ft_putstr("\n");
-		i++;
+			ft_op_store_do(op, oper, a, b);
+		free(line);
 	}
-	return (i);
-}
-
-void			ft_destroy_operators(t_operators **op)
-{
-	free((*op)->operators);
-	free(*op);
-	*op = NULL;
+	return (op);
 }

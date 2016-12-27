@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "../include/main.h"
 
 
 int				where_data(t_stack *ps, t_sdata data)//0: front, 1: back

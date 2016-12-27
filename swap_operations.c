@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "swap_base.h"
-#include "main.h"
+#include "../include/swap_base.h"
+#include "../include/main.h"
 
 static int		sw_operate_rr(t_stack *a, t_stack *b, t_sw_operator op)
 {

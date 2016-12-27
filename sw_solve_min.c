@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "../include/main.h"
 
 void			ft_calculate_ij(t_stack *a, t_stack *b, t_operators *op, int i[])
 {

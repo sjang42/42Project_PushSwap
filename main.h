@@ -13,12 +13,11 @@
 #ifndef MAIN_H
 # define MAIN_H
 
-# include "stack.h"
+# include "../libft/include/libft.h"
 # include "swap_base.h"
-# include "./libft/libft.h"
-# include "stdio.h"//
+# include <stdio.h>//
 
-t_stack				*ft_get_stack_a(int argc, char *argv[]);
+t_stack				*ft_get_stack_a(int argc, char *argv[], t_swoptions	option);
 /*
 **					add_libft.c
 */
@@ -26,10 +25,6 @@ int					ft_isint(long long n);
 int					ft_isonly_digit(const char *str);
 int					ft_digitcount(int nb);
 void				ft_putstr_wd(char *str);
-/*
-**					???
-*/
-char				*ft_read_one(void);
 /*
 **					sw_solve_min.c
 */
@@ -42,7 +37,6 @@ void				ft_quicksort(int arr[], int left, int right);
 /*
 **					ft_operators.c
 */
-void				ft_memcheck_operators(t_operators *op);
 void				ft_store_operator(t_operators *op, t_sw_operator operator);
 t_operators			*ft_operators_new(size_t size);
 /*
@@ -51,6 +45,8 @@ t_operators			*ft_operators_new(size_t size);
 t_operators			*sw_solve_quick(t_stack *a, t_stack *b, t_operators *op, int order, int length);
 void				ft_op_store_do(t_operators *op, t_sw_operator operator, t_stack *a, t_stack *b);
 void				ft_op_store_do_show(t_operators *op, t_sw_operator operator, t_stack *a, t_stack *b);
+void				ft_op_store_do_show_ch(t_operators *op, t_sw_operator operator, t_stack *a, t_stack *b);
+
 void				ft_show_operator(t_sw_operator oper);
 t_sw_operator		ra_or_rr(t_stack *b, int count_b, int rbm);
 t_sw_operator		sa_or_ss(t_stack *b);
@@ -66,5 +62,13 @@ void				ftssau_deal_3_note(t_operators *op, int arr[], t_stack *b, int count_b, 
 **					solve_send.c
 */
 t_operators			*sw_solve_send(t_stack *a, t_stack *b, t_operators *op);
+/*
+**					option.c
+*/
+t_swoptions			ft_get_swoption(char *str);
+/*
+**					usage.c
+*/
+void				ft_show_usage(void);
 
 #endif

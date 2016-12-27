@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "../include/main.h"
 
 int				*ft_stack_to_arr(t_stack *ps, int arr[], size_t size)
 {
@@ -267,14 +267,8 @@ t_operators			*ft_stack_sort_a_under3(t_stack *a, t_stack *b,
 
 	op = ft_operators_new(10);
 	ft_stack_to_arr(a, arr, length);
-	if (length == 4 && ft_stack_size(a) != length)
-		ftssau_deal_4(op, arr);
-	else if (length == 4)
-		ftssau_deal_4_note(op, arr);
-	else if (length == 3 && ft_stack_size(a) != length)
+	if (length == 3)
 		ftssau_deal_3(op, arr, b, count_b, rbm);
-	else if (length == 3)
-		ftssau_deal_3_note(op, arr, b, count_b, rbm);
 	else if (length == 2 && arr[0] > arr[1])	//ba
 			ft_store_operator(op, sa_or_ss(b));
 	return (op);
@@ -416,35 +410,6 @@ t_operators			*ft_stack_sort_b_under3(t_stack *a, t_stack *b, int length)
 	return (op);
 }
 
-void			ft_show_operator(t_sw_operator oper)
-{
-	if (oper == SA)
-		ft_putstr("sa");
-	else if (oper == SB)
-		ft_putstr("sb");
-	else if (oper == SS)
-		ft_putstr("ss");
-	else if (oper == PA)
-		ft_putstr("pa");
-	else if (oper == PB)
-		ft_putstr("pb");
-	else if (oper == RA)
-		ft_putstr("ra");
-	else if (oper == RB)
-		ft_putstr("rb");
-	else if (oper == RR)
-		ft_putstr("rr");
-	else if (oper == RRA)
-		ft_putstr("rra");
-	else if (oper == RRB)
-		ft_putstr("rrb");
-	else if (oper == RRR)
-		ft_putstr("rrr");
-	ft_putstr("\n");
-}
-
-
-
 
 void			ft_opcat(t_operators *dst, t_operators *src)
 {
@@ -457,23 +422,6 @@ void			ft_opcat(t_operators *dst, t_operators *src)
 		i++;
 	}
 }
-
-void			ft_op_store_do(t_operators *op, t_sw_operator operator,
-								t_stack *a, t_stack *b)
-{
-	ft_store_operator(op, operator);
-	sw_operate(a, b, operator);
-}
-
-void			ft_op_store_do_show(t_operators *op, t_sw_operator operator,
-								t_stack *a, t_stack *b)
-{
-	ft_store_operator(op, operator);
-	sw_operate(a, b, operator);
-	ft_show_operator(operator);
-	ft_stack_display_cos(a, b);
-}
-
 
 t_operators		*sw_solve_quick(t_stack *a, t_stack *b, t_operators *op,
 								int order, int length)

@@ -10,7 +10,46 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "../include/main.h"
+
+static int	get_positional_int_sw(int nb)
+{
+	int positional;
+	int temp;
+
+	positional = 1;
+	temp = nb;
+	while (temp >= 10 || temp <= -10)
+	{
+		temp /= 10;
+		positional *= 10;
+	}
+	return (positional);
+}
+
+int			ft_putnbr_sw(int nb)
+{
+	char	digit;
+	int		positional;
+	int		ret;
+
+	positional = get_positional_int_sw(nb);
+	ret = positional;
+	if (nb < 0)
+	{
+		write(1, "-", 1);
+		positional *= -1;
+	}
+	while (positional != 0)
+	{
+		digit = nb / positional + '0';
+		write(1, &digit, 1);
+		nb %= positional;
+		positional /= 10;
+	}
+	return (ret);
+}
+
 
 void	ft_putstr_wd(char *str)
 {
@@ -69,7 +108,7 @@ void	ft_stack_display(t_stack *pstack)
 	cur = pstack->head;
 	while (cur)
 	{
-		ft_putnbr(cur->data);
+		ft_putnbr_sw(cur->data);
 		ft_putstr("\n");
 		cur = cur->next;
 	}
@@ -115,7 +154,7 @@ void	ft_stack_display_cos(t_stack *a, t_stack *b)
 			write(1, "\n│		", 6);
 			count = 0;
 		}
-		count += ft_putnbr(cur->data) + 2;
+		count += ft_putnbr_sw(cur->data) + 2;
 		cur = cur->next;
 		i++;
 	}
@@ -134,7 +173,7 @@ void	ft_stack_display_cos(t_stack *a, t_stack *b)
 			write(1, "\n│		", 6);
 			count = 0;
 		}
-		count += ft_putnbr(cur->data) + 2;
+		count += ft_putnbr_sw(cur->data) + 2;
 		cur = cur->next;
 		i++;
 	}

@@ -10,20 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "../include/main.h"
 
-t_stack		*ft_get_stack_a(int argc, char *argv[])
+t_stack		*ft_get_stack_a(int argc, char *argv[], t_swoptions	option)
 {
 	int			i;
 	long long	n;
 	t_stack		*a;
 
-	a = (t_stack*)malloc(sizeof(t_stack));
-	ft_stack_init(a);
-	if (argc < 2)
-		ft_exit_error("No input");		
+	a = ft_stack_new();
+	
 	i = argc - 1;
-	while (i > 0)
+	while (i > (option != 0))
 	{
 		n = ft_atoll(argv[i]);
 		if (!ft_isonly_digit(argv[i]) || !ft_isint(n))

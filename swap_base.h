@@ -13,7 +13,7 @@
 #ifndef SWAP_BASE_H
 # define SWAP_BASE_H
 
-# include "stack.h"
+# include "../libft/include/stack.h"
 
 typedef enum		e_sw_operator
 {
@@ -36,6 +36,12 @@ typedef struct		s_operators
 	int				idx;
 	t_sw_operator	*operators;
 }					t_operators;
+
+typedef enum		e_swoptions
+{
+	NOTHING = 0,
+	CHECKER_SHOW_OP = 1,
+}					t_swoptions;
 
 /*
 **					swap_operations_sub.c
@@ -60,9 +66,7 @@ int					ft_check_stack(t_stack *a, t_stack *b);
 /*
 **					get_operators.c
 */
-t_sw_operator		ft_decide_operator(char *line);
-t_operators			*ft_get_operators(void);
-t_operators			*ft_get_operators_cos(t_stack *a, t_stack *b);
+t_operators			*ft_get_operators(t_stack *a, t_stack *b, t_swoptions option);
 int					ft_display_operators(t_operators *op);
 void				ft_destroy_operators(t_operators **op);
 /*

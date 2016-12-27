@@ -10,27 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "../include/main.h"
 
-// int main(int argc, char *argv[])
-// {
-// 	t_stack		*a;
-// 	t_stack		*b;
-// 	t_operators *op;
+int main(int argc, char *argv[])
+{
+	t_stack			*a;
+	t_stack			*b;
+	t_operators		*op;
+	t_swoptions		option;
 
-// 	a = ft_stack_new();
-// 	b = ft_stack_new();
+	if (argc < 2)
+	{
+		ft_show_usage();
+		return (0);
+	}
+	option = ft_get_swoption(argv[1]);
+	a = ft_get_stack_a(argc, argv, option);
+	b = ft_stack_new();
+	op = ft_get_operators(a, b, option);
 
-// 	a = ft_get_stack_a(argc, argv);
-// 	op = ft_operators_new(100);
+	ft_check_stack(a, b);
 
-// 	op = ft_get_operators_cos(a, b);
-// 	ft_calculate(a, b, op);
-
-// 	ft_check_stack(a, b);
-// 	ft_stack_destroy(&a);
-// 	ft_stack_destroy(&b);
-// 	ft_destroy_operators(&op);
-// 	return (0);
-// }
-
+	ft_stack_destroy(&a);
+	ft_stack_destroy(&b);
+	ft_destroy_operators(&op);
+	return (0);
+}

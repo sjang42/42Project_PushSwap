@@ -10,9 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "../include/main.h"
 
-void			ft_memcheck_operators(t_operators *op)
+//111
+
+static void		ft_memcheck_operators(t_operators *op)
 {
 	if (op->idx >= op->size - 2)
 	{
@@ -40,4 +42,99 @@ t_operators		*ft_operators_new(size_t size)
 	ret->size = size;
 	ret->idx = 0;
 	return (ret);
+}
+
+void			ft_destroy_operators(t_operators **op)
+{
+	free((*op)->operators);
+	free(*op);
+	*op = NULL;
+}
+
+//222
+
+void			ft_op_store_do(t_operators *op, t_sw_operator operator,
+								t_stack *a, t_stack *b)
+{
+	ft_store_operator(op, operator);
+	sw_operate(a, b, operator);
+}
+
+void			ft_op_store_do_show(t_operators *op, t_sw_operator operator,
+								t_stack *a, t_stack *b)
+{
+	ft_store_operator(op, operator);
+	sw_operate(a, b, operator);
+	ft_show_operator(operator);
+	ft_stack_display_cos(a, b);
+}
+
+void			ft_op_store_do_show_ch(t_operators *op, t_sw_operator operator,
+								t_stack *a, t_stack *b)
+{
+	ft_store_operator(op, operator);
+	sw_operate(a, b, operator);
+	ft_stack_display_cos(a, b);
+}
+
+int				ft_display_operators(t_operators *op)
+{
+	size_t i;
+
+	i = 0;
+	while (i < op->idx)
+	{
+		if ((op->operators)[i] == SA)
+			ft_putstr("sa");
+		else if ((op->operators)[i] == SB)
+			ft_putstr("sb");
+		else if ((op->operators)[i] == SS)
+			ft_putstr("ss");
+		else if ((op->operators)[i] == PA)
+			ft_putstr("pa");
+		else if ((op->operators)[i] == PB)
+			ft_putstr("pb");
+		else if ((op->operators)[i] == RA)
+			ft_putstr("ra");
+		else if ((op->operators)[i] == RB)
+			ft_putstr("rb");
+		else if ((op->operators)[i] == RR)
+			ft_putstr("rr");
+		else if ((op->operators)[i] == RRA)
+			ft_putstr("rra");
+		else if ((op->operators)[i] == RRB)
+			ft_putstr("rrb");
+		else if ((op->operators)[i] == RRR)
+			ft_putstr("rrr");
+		ft_putstr("\n");
+		i++;
+	}
+	return (i);
+}
+
+void			ft_show_operator(t_sw_operator oper)
+{
+	if (oper == SA)
+		ft_putstr("sa");
+	else if (oper == SB)
+		ft_putstr("sb");
+	else if (oper == SS)
+		ft_putstr("ss");
+	else if (oper == PA)
+		ft_putstr("pa");
+	else if (oper == PB)
+		ft_putstr("pb");
+	else if (oper == RA)
+		ft_putstr("ra");
+	else if (oper == RB)
+		ft_putstr("rb");
+	else if (oper == RR)
+		ft_putstr("rr");
+	else if (oper == RRA)
+		ft_putstr("rra");
+	else if (oper == RRB)
+		ft_putstr("rrb");
+	else if (oper == RRR)
+		ft_putstr("rrr");
+	ft_putstr("\n");
 }

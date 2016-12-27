@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "stack.h"
-# include "swap_base.h"
-# include "main.h"
+# include "../include/swap_base.h"
+# include "../include/main.h"
 
 int		sw_swap(t_stack *pstack)
 {
