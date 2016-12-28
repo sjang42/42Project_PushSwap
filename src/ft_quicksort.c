@@ -45,7 +45,6 @@ static int		qs_partition(int arr[], int left, int right)
 	int pivot;
 	int low;
 	int high;
-	int i;
 
 	pivot = ft_get_pivot(arr, left, right);
 	if (pivot != left)

@@ -79,7 +79,7 @@ void			ft_op_store_do_show_ch(t_operators *op, t_sw_operator operator,
 
 int				ft_display_operators(t_operators *op)
 {
-	size_t i;
+	int i;
 
 	i = 0;
 	while (i < op->idx)

@@ -25,12 +25,16 @@ int main(int argc, char *argv[])
 		return (0);
 	}
 	option = ft_get_swoption(argv[1]);
-	a = ft_get_stack_a(argc, argv, option);
+	if (option != NOTHING && argc == 2)
+	{
+		ft_show_usage();
+		return (0);
+	}
+	a = ft_get_stack_a(argc, argv, option);	
 	b = ft_stack_new();
 	op = ft_get_operators(a, b, option);
 
 	ft_check_stack(a, b);
-
 	ft_stack_destroy(&a);
 	ft_stack_destroy(&b);
 	ft_destroy_operators(&op);

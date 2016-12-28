@@ -67,7 +67,7 @@ int				sw_operate(t_stack *a, t_stack *b, t_sw_operator op)
 
 void			ft_calculate(t_stack *a, t_stack *b, t_operators *op)
 {
-	size_t i;
+	int i;
 
 	i = 0;
 	while (i < op->idx)
@@ -79,7 +79,7 @@ void			ft_calculate(t_stack *a, t_stack *b, t_operators *op)
 
 void			ft_calculate_show(t_stack *a, t_stack *b, t_operators *op)
 {
-	size_t i;
+	int i;
 
 	i = 0;
 	ft_stack_display_cos(a, b);
@@ -92,15 +92,3 @@ void			ft_calculate_show(t_stack *a, t_stack *b, t_operators *op)
 	}
 }
 
-void			ft_calculate_from(t_stack *a, t_stack *b,
-									t_operators *op, size_t from)
-{
-	size_t i;
-
-	i = from;
-	while (i < op->idx)
-	{
-		sw_operate(a, b, (op->operators)[i]);
-		i++;
-	}
-}

@@ -117,7 +117,7 @@ t_operators				*ft_get_operators(t_stack *a, t_stack *b,
 			ft_exit_error("Wrong Operator");
 		}
 		if (option & CHECKER_SHOW_OP)
-			ft_op_store_do_show_ch(op, oper, a, b);
+			ft_op_store_do_show(op, oper, a, b);
 		else
 			ft_op_store_do(op, oper, a, b);
 		free(line);

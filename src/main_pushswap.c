@@ -12,24 +12,32 @@
 
 #include "../include/main.h"
 
-// int main(int argc, char *argv[])
-// {
-// 	t_stack		*a;
-// 	t_stack		*b;
-// 	t_operators *op;
+int main(int argc, char *argv[])
+{
+	t_swstacks		*sts;
+	t_swoptions		option;
 
-// 	a = ft_stack_new();
-// 	b = ft_stack_new();
+	sts = (t_swstacks*)malloc(sizeof(t_swstacks));
+	if (argc < 2)
+	{
+		ft_show_usage_ps();
+		return (0);
+	}
+	option = ft_get_swoption(argv[1]);
+	if (option != NOTHING && argc == 2)
+	{
+		ft_show_usage_ps();
+		return (0);
+	}
+	sts->a = ft_get_stack_a(argc, argv, option);
+	sts->b = ft_stack_new();
+	sts->op = ft_operators_new(100);
 
-// 	a = ft_get_stack_a(argc, argv);
-// 	op = ft_operators_new(100);
-
-// 	sw_solve_quick(a, b, op, 1, ft_stack_size(a));
-// 	ft_display_operators(op);
-
-// 	ft_stack_destroy(&a);
-// 	ft_stack_destroy(&b);
-// 	ft_destroy_operators(&op);
-// 	return (0);
-// }
-
+	solve_quick_atob(sts, ft_stack_size(sts->a));
+	ft_display_operators(sts->op);
+	
+	ft_stack_destroy(&sts->a);
+	ft_stack_destroy(&sts->b);
+	ft_destroy_operators(&sts->op);
+	return (0);
+}

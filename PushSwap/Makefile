@@ -5,23 +5,25 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sjang <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/12/26 18:15:36 by sjang             #+#    #+#              #
-#    Updated: 2016/12/26 18:15:37 by sjang            ###   ########.fr        #
+#    Created: 2016/12/27 16:21:00 by sjang             #+#    #+#              #
+#    Updated: 2016/12/27 16:21:01 by sjang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-TARGET					=	../checker
+
+TARGET					=	../push_swap
 
 OBJECTS					=	usage.o\
 							option.o\
 							fill_stack.o\
-							get_operators.o\
-							check.o\
 							ft_operators.o\
-							main_checker.o\
+							solve_quick.o\
+							solve_quick_sub.o\
+							under3_a.o under3_b.o\
+							main_pushswap.o\
 							stack_sw.o\
-							swap_operations.o swap_operations_sub.o
-
+							swap_operations.o swap_operations_sub.o\
+							ft_quicksort.o\
 
 SRC						=	../src/
 ICL						=	../include/
@@ -53,6 +55,12 @@ ft_operators.o			:	$(SRC)ft_operators.c $(HEADERS)
 option.o				:	$(SRC)option.c $(HEADERS)
 usage.o					:	$(SRC)usage.c $(HEADERS)
 
+solve_quick.o			:	$(SRC)solve_quick.c $(HEADERS)
+solve_quick_sub.o		:	$(SRC)solve_quick_sub.c $(HEADERS)
+under3_a.o				:	$(SRC)under3_a.c $(HEADERS)
+under3_b.o				:	$(SRC)under3_b.c $(HEADERS)
+ft_quicksort.o			:	$(SRC)ft_quicksort.c $(HEADERS)
+
 stack_sw.o				:	$(SRC)stack_sw.c $(HEADERS)
 
 clean					:
@@ -60,4 +68,5 @@ clean					:
 fclean					:	clean
 							$(RM) $(TARGET)
 re						:	fclean all
+
 

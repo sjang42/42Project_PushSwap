@@ -32,7 +32,7 @@ typedef enum		e_sw_operator
 
 typedef struct		s_operators
 {
-	size_t			size;
+	int				size;
 	int				idx;
 	t_sw_operator	*operators;
 }					t_operators;
@@ -42,6 +42,13 @@ typedef enum		e_swoptions
 	NOTHING = 0,
 	CHECKER_SHOW_OP = 1,
 }					t_swoptions;
+
+typedef struct		s_swstacks
+{
+	t_stack		*a;
+	t_stack		*b;
+	t_operators	*op;
+}					t_swstacks;
 
 /*
 **					swap_operations_sub.c
