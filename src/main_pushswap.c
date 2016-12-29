@@ -30,7 +30,9 @@ int main(int argc, char *argv[])
 		ft_destroy_sts(sts);
 		return (0);
 	}
+
 	solve_quick_atob(sts, ft_stack_size(sts->a));
+	
 	ft_display_operators(sts->op);
 	ft_destroy_sts(sts);
 	return (0);

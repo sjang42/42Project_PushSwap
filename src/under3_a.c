@@ -177,8 +177,8 @@ void			under3_a(t_swstacks *sts, int length)
 	ft_stack_to_arr(sts->a, arr, length);
 	if (length == 3)
 		(ft_stack_size(sts->a) == length) ?
-	deal3_a_sub_note(sts, arr) :
-	deal3_a_sub(sts, arr);
+		deal3_a_sub_note(sts, arr) :
+		deal3_a_sub(sts, arr);
 	else if (length == 2 && arr[0] > arr[1])
 		ft_op_store_do(sts->op, SA, sts->a, sts->b);
 }

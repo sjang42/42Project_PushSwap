@@ -17,13 +17,17 @@
 # include "swap_base.h"
 # include <stdio.h>//
 
-// typedef struct		s_quick_tool
-// {
-// 	int count_p;
-// 	int count_r;
-// 	int length;
-// 	int rbm;
-// }					t_quick_tool;
+typedef struct		s_quick_tool
+{
+	int future_ra;
+	int count_pa;
+	int count_pb;
+	int count_ra;
+	int count_rb;
+	int length;
+	int pivot;
+	int rbm;
+}					t_quick_tool;
 
 
 void				ft_get_stack_a(int argc, char *argv[], t_swstacks *sts);
@@ -65,7 +69,7 @@ void				solve_quick_btoa(t_swstacks *sts, int length);
 int					ft_get_pivot(t_stack *a, size_t length);
 int					ft_get_rbm(t_stack *a, size_t length);
 t_sw_operator		ra_or_rr(t_stack *b, int count_b, int rbm);
-int					ft_rpb(t_swstacks *sts,	int count_b, int rbm);
+int				ft_rpb(t_swstacks *sts,	t_quick_tool *tool);
 
 // void				ft_rpb(t_swstacks *sts,	int count_b, int rbm);
 
