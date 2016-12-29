@@ -19,8 +19,8 @@ int			ft_future_ra(t_swstacks *sts, int length)
 	int				pivot;
 	t_stack_node	*cur;
 
-	// if(ft_stack_isempty(sts->b))
-	// 	return (0);
+	if(ft_stack_isempty(sts->b))
+		return (0);
 	pivot = ft_get_pivot(sts->a, length);
 	count_ra = 0;
 	count_pb = 0;
@@ -36,6 +36,29 @@ int			ft_future_ra(t_swstacks *sts, int length)
 	return (count_ra);
 }
 
+// int			ft_future_rb(t_swstacks *sts, int length)
+// {
+// 	int				count_rb;
+// 	int				count_pa;
+// 	int				pivot;
+// 	t_stack_node	*cur;
+
+// 	// if(ft_stack_isempty(sts->b))
+// 	// 	return (0);
+// 	pivot = ft_get_pivot(sts->a, length);
+// 	count_ra = 0;
+// 	count_pb = 0;
+// 	cur = sts->a->head;
+// 	while (cur->next && (count_pb < length / 2))
+// 	{
+// 		if (cur->data < pivot)
+// 			count_pb++;
+// 		else
+// 			count_ra++;
+// 		cur = cur->next;
+// 	}
+// 	return (count_ra);
+// }
 
 void		solve_quick_atob(t_swstacks *sts, int length)
 {
@@ -70,7 +93,8 @@ void		solve_quick_atob(t_swstacks *sts, int length)
 		}
 		else
 		{
-			if (tool->count_rb < tool->future_ra &&
+			if ((tool->count_rb < tool->future_ra ||
+				ft_stack_size(sts->b) == tool->count_pb) &&
 				ra_or_rr(sts->b, tool->count_pb, tool->rbm) == RR)
 			{
 				ft_op_store_do(sts->op, RR,	sts->a, sts->b);
@@ -108,6 +132,7 @@ void		solve_quick_btoa(t_swstacks *sts, int length)
 	int count_rb;
 	int pivot;
 	int i;
+	int future_rb;
 
 	count_rb = 0;
 	if (length <= 3)
