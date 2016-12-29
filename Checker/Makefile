@@ -20,8 +20,8 @@ OBJECTS					=	usage.o\
 							ft_operators.o\
 							main_checker.o\
 							stack_sw.o\
-							swap_operations.o swap_operations_sub.o
-
+							swap_operations.o swap_operations_sub.o\
+							sw_destroy.o deal_sts.o
 
 SRC						=	../src/
 ICL						=	../include/
@@ -54,6 +54,9 @@ option.o				:	$(SRC)option.c $(HEADERS)
 usage.o					:	$(SRC)usage.c $(HEADERS)
 
 stack_sw.o				:	$(SRC)stack_sw.c $(HEADERS)
+sw_destroy.o			:	$(SRC)sw_destroy.c $(HEADERS)
+deal_sts.o				:	$(SRC)deal_sts.c $(HEADERS)
+
 
 clean					:
 							$(RM) $(OBJECTS)

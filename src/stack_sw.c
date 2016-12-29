@@ -34,11 +34,12 @@ int			ft_putnbr_sw(int nb)
 	int		ret;
 
 	positional = get_positional_int_sw(nb);
-	ret = positional;
+	ret = 0;
 	if (nb < 0)
 	{
 		write(1, "-", 1);
 		positional *= -1;
+		ret++;
 	}
 	while (positional != 0)
 	{
@@ -46,10 +47,10 @@ int			ft_putnbr_sw(int nb)
 		write(1, &digit, 1);
 		nb %= positional;
 		positional /= 10;
+		ret++;
 	}
 	return (ret);
 }
-
 
 void	ft_putstr_wd(char *str)
 {
@@ -139,28 +140,38 @@ void	ft_stack_display_cos(t_stack *a, t_stack *b)
 	int				i;
 	int				count;
 
-	ft_putstr_wd("┌──────────────────────────────────────────────────  \n│");
+	ft_putstr_wd("┌──────────────────────────────────────────────────┐  \n│");
 
-	ft_putstr("	a :	");
+	ft_putstr("    a : ");
 	i = 0;
 	cur = a->head;
 	count = 0;
 	while (cur)
 	{
 		if (i != 0)
-			ft_putstr(", "); 
-		if ((count + ft_digitcount(cur->data)) > 33)
+			ft_putstr(", ");
+		if ((count + ft_digitcount(cur->data)) > 40)
 		{
-			write(1, "\n│		", 6);
+			count = 42 - count;
+			write(1, "                                              ", count);
+			write(1, "│\n│         ", 15);
 			count = 0;
 		}
 		count += ft_putnbr_sw(cur->data) + 2;
 		cur = cur->next;
 		i++;
 	}
+	if (count)
+	{
+		count = 44 - count;
+		write(1, "                       \
+                                         ", count);
+		write(1, "│                 ", 9);
+		count = 0;
+	}
 	ft_putstr("\n");
-	ft_putstr_wd("│──────────────────────────────────────────────────  \n│");
-	ft_putstr("	b :	");
+	ft_putstr_wd("├──────────────────────────────────────────────────┤  \n│");
+	ft_putstr("    b : ");
 	i = 0;
 	cur = b->head;
 	count = 0;
@@ -168,15 +179,26 @@ void	ft_stack_display_cos(t_stack *a, t_stack *b)
 	{
 		if (i != 0)
 			ft_putstr(", "); 
-		if ((count + ft_digitcount(cur->data)) > 33)
+		if ((count + ft_digitcount(cur->data)) > 40)
 		{
-			write(1, "\n│		", 6);
+			count = 42 - count;
+			write(1, "                                              ", count);
+			write(1, "│\n│         ", 15);
 			count = 0;
 		}
 		count += ft_putnbr_sw(cur->data) + 2;
 		cur = cur->next;
 		i++;
 	}
+	if (count || i == 0)
+	{
+		count = 42 - count;
+		if (i != 0)
+			count += 2;
+		write(1, "                       \
+                                         ", count);
+		write(1, "│                 ", 9);
+	}
 	ft_putstr("\n");
-	ft_putstr_wd("└──────────────────────────────────────────────────  \n");
+	ft_putstr_wd("└──────────────────────────────────────────────────┘  \n");
 }

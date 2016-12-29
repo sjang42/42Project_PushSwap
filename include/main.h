@@ -26,7 +26,7 @@
 // }					t_quick_tool;
 
 
-t_stack				*ft_get_stack_a(int argc, char *argv[], t_swoptions	option);
+void				ft_get_stack_a(int argc, char *argv[], t_swstacks *sts);
 /*
 **					add_libft.c
 */
@@ -65,7 +65,9 @@ void				solve_quick_btoa(t_swstacks *sts, int length);
 int					ft_get_pivot(t_stack *a, size_t length);
 int					ft_get_rbm(t_stack *a, size_t length);
 t_sw_operator		ra_or_rr(t_stack *b, int count_b, int rbm);
-void				ft_rpb(t_swstacks *sts,	int count_b, int rbm);
+int					ft_rpb(t_swstacks *sts,	int count_b, int rbm);
+
+// void				ft_rpb(t_swstacks *sts,	int count_b, int rbm);
 
 /*
 **					ftssau_deal.c
@@ -95,7 +97,9 @@ void				ft_show_usage_ps(void);
 void				ft_stack_to_arr(t_stack *ps, int arr[], int size);
 void				under3_a(t_swstacks *sts, int length);
 void				under3_b(t_swstacks *sts, int length);
-
-
+/*
+**					deal_sts.c
+*/
+t_swstacks			*ft_stsnew(t_swoptions option);
 
 #endif

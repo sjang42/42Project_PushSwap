@@ -44,13 +44,6 @@ t_operators		*ft_operators_new(size_t size)
 	return (ret);
 }
 
-void			ft_destroy_operators(t_operators **op)
-{
-	free((*op)->operators);
-	free(*op);
-	*op = NULL;
-}
-
 //222
 
 void			ft_op_store_do(t_operators *op, t_sw_operator operator,

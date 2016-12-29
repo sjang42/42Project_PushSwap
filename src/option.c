@@ -14,7 +14,12 @@
 
 t_swoptions ft_get_swoption(char *str)
 {
+	t_swoptions	ret;
+
+	ret = NOTHING;
 	if (!ft_strcmp("-s", str))
-		return (CHECKER_SHOW_OP);
-	return (NOTHING);
+		ret |= OP_DISPLAY;
+	if (!ft_strcmp("-m", str))
+		ret |= OP_SIZE_OPER;
+	return (ret);
 }

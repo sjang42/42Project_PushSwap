@@ -63,39 +63,110 @@ void			ft_stack_to_arr(t_stack *ps, int arr[], int size)
 	}
 }
 
-static void		deal3_a_sub(t_operators *op, int arr[])
+static			t_sw_operator sa_or_ss(t_stack *b)
+{
+	t_stack_node	*cur;
+
+	if (ft_stack_size(b) <= 1)
+		return (SA);
+	cur = b->head;
+	if (cur->data < cur->next->data)
+		return (SS);
+	else
+		return (SA);
+}
+
+static void		deal3_a_sub(t_swstacks *sts, int arr[])
 {
 	if (ft_arr_order(213, arr, 3))
-		ft_store_operator(op, SA);
+		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
 	else if (ft_arr_order(312, arr, 3))
 	{
-		ft_store_operator(op, SA);
-		ft_store_operator(op, RA);
-		ft_store_operator(op, SA);
-		ft_store_operator(op, RRA);
+		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
+		ft_op_store_do(sts->op, RA, sts->a, sts->b);
+		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
+		ft_op_store_do(sts->op, RRA, sts->a, sts->b);
 	}
 	else if (ft_arr_order(132, arr, 3))
 	{
-		ft_store_operator(op, RA);
-		ft_store_operator(op, SA);
-		ft_store_operator(op, RRA);
+		ft_op_store_do(sts->op, RA, sts->a, sts->b);
+		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
+		ft_op_store_do(sts->op, RRA, sts->a, sts->b);
 	}
 	else if (ft_arr_order(231, arr, 3))
 	{
-		ft_store_operator(op, RA);
-		ft_store_operator(op, SA);
-		ft_store_operator(op, RRA);
-		ft_store_operator(op, SA);
+		ft_op_store_do(sts->op, RA, sts->a, sts->b);
+		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
+		ft_op_store_do(sts->op, RRA, sts->a, sts->b);
+		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
 	}
 	else if (ft_arr_order(321, arr, 3))
 	{
-		ft_store_operator(op, SA);
-		ft_store_operator(op, RA);
-		ft_store_operator(op, SA);
-		ft_store_operator(op, RRA);
-		ft_store_operator(op, SA);
+		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
+		ft_op_store_do(sts->op, RA, sts->a, sts->b);
+		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
+		ft_op_store_do(sts->op, RRA, sts->a, sts->b);
+		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
 	}
 }
+
+static void		deal3_a_sub_note(t_swstacks *sts, int arr[])
+{
+	if (ft_arr_order(123, arr, 3))
+		;
+	else if (ft_arr_order(213, arr, 3))
+		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
+	else if (ft_arr_order(312, arr, 3))
+		ft_op_store_do(sts->op, RA, sts->a, sts->b);
+	else if (ft_arr_order(132, arr, 3))
+	{
+		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
+		ft_op_store_do(sts->op, RA, sts->a, sts->b);
+	}
+	else if (ft_arr_order(231, arr, 3))
+		ft_op_store_do(sts->op, RRA, sts->a, sts->b);
+	else if (ft_arr_order(321, arr, 3))
+	{
+		ft_op_store_do(sts->op, RA, sts->a, sts->b);
+		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
+	}
+}
+
+// static void		deal3_a_sub(t_swstacks *sts, int arr[],
+// 							int count_b, int rbm)
+// {
+// 	rbm = count_b;
+// 	if (ft_arr_order(213, arr, 3))
+// 		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
+// 	else if (ft_arr_order(312, arr, 3))
+// 	{
+// 		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
+// 		ft_op_store_do(sts->op, RA, sts->a, sts->b);
+// 		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
+// 		ft_op_store_do(sts->op, RRA, sts->a, sts->b);
+// 	}
+// 	else if (ft_arr_order(132, arr, 3))
+// 	{
+// 		ft_op_store_do(sts->op, RA, sts->a, sts->b);
+// 		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
+// 		ft_op_store_do(sts->op, RRA, sts->a, sts->b);
+// 	}
+// 	else if (ft_arr_order(231, arr, 3))
+// 	{
+// 		ft_op_store_do(sts->op, RA, sts->a, sts->b);
+// 		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
+// 		ft_op_store_do(sts->op, RRA, sts->a, sts->b);
+// 		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
+// 	}
+// 	else if (ft_arr_order(321, arr, 3))
+// 	{
+// 		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
+// 		ft_op_store_do(sts->op, RA, sts->a, sts->b);
+// 		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
+// 		ft_op_store_do(sts->op, RRA, sts->a, sts->b);
+// 		ft_op_store_do(sts->op, sa_or_ss(sts->b), sts->a, sts->b);
+// 	}
+// }
 
 void			under3_a(t_swstacks *sts, int length)
 {
@@ -105,7 +176,9 @@ void			under3_a(t_swstacks *sts, int length)
 		return ;
 	ft_stack_to_arr(sts->a, arr, length);
 	if (length == 3)
-		deal3_a_sub(sts->op, arr);
+		(ft_stack_size(sts->a) == length) ?
+	deal3_a_sub_note(sts, arr) :
+	deal3_a_sub(sts, arr);
 	else if (length == 2 && arr[0] > arr[1])
-			ft_store_operator(sts->op, SA);
+		ft_op_store_do(sts->op, SA, sts->a, sts->b);
 }

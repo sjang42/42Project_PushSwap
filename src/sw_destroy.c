@@ -1,21 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   sw_destroy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sjang <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/26 01:15:37 by sjang             #+#    #+#             */
-/*   Updated: 2016/11/26 01:15:38 by sjang            ###   ########.fr       */
+/*   Created: 2016/12/29 10:21:53 by sjang             #+#    #+#             */
+/*   Updated: 2016/12/29 10:21:54 by sjang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/main.h"
+#include "../include/main.h"
 
-int		ft_check_stack(t_stack *a, t_stack *b)
+void			ft_destroy_operators(t_operators **op)
 {
-	if (ft_stack_isempty(b) && ft_stack_issort(a))
-		return (1);
-	else
-		return (0);
+	free((*op)->operators);
+	free(*op);
+	*op = NULL;
+}
+
+void			ft_destroy_sts(t_swstacks *sts)
+{
+	ft_stack_destroy(&(sts->a));
+	ft_stack_destroy(&(sts->b));
+	ft_destroy_operators(&(sts->op));
+	free(sts);
+}
+
+void			ft_destroy_sts_exit(t_swstacks *sts)
+{
+	ft_destroy_sts(sts);
+	ft_exit_error(NULL);
 }

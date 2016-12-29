@@ -40,7 +40,8 @@ typedef struct		s_operators
 typedef enum		e_swoptions
 {
 	NOTHING = 0,
-	CHECKER_SHOW_OP = 1,
+	OP_DISPLAY = 1,
+	OP_SIZE_OPER = 2,
 }					t_swoptions;
 
 typedef struct		s_swstacks
@@ -48,6 +49,7 @@ typedef struct		s_swstacks
 	t_stack		*a;
 	t_stack		*b;
 	t_operators	*op;
+	t_swoptions	option;
 }					t_swstacks;
 
 /*
@@ -73,9 +75,8 @@ int					ft_check_stack(t_stack *a, t_stack *b);
 /*
 **					get_operators.c
 */
-t_operators			*ft_get_operators(t_stack *a, t_stack *b, t_swoptions option);
+t_operators			*ft_get_operators(t_swstacks *sts, t_swoptions option);
 int					ft_display_operators(t_operators *op);
-void				ft_destroy_operators(t_operators **op);
 /*
 **					sw_solve.c
 */
@@ -89,5 +90,11 @@ t_sdata				ft_stack_most(t_stack *pstack);
 void				ft_stack_display(t_stack *pstack);
 void				ft_stack_display_cos(t_stack *a, t_stack *b);
 int					ft_stack_where_data(t_stack *ps, t_sdata q);
+/*
+**					sw_destroy.c
+*/
+void				ft_destroy_operators(t_operators **op);
+void				ft_destroy_sts(t_swstacks *sts);
+void				ft_destroy_sts_exit(t_swstacks *sts);
 
 #endif

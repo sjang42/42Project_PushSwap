@@ -24,6 +24,8 @@ OBJECTS					=	usage.o\
 							stack_sw.o\
 							swap_operations.o swap_operations_sub.o\
 							ft_quicksort.o\
+							sw_destroy.o deal_sts.o\
+							check.o
 
 SRC						=	../src/
 ICL						=	../include/
@@ -62,6 +64,10 @@ under3_b.o				:	$(SRC)under3_b.c $(HEADERS)
 ft_quicksort.o			:	$(SRC)ft_quicksort.c $(HEADERS)
 
 stack_sw.o				:	$(SRC)stack_sw.c $(HEADERS)
+sw_destroy.o			:	$(SRC)sw_destroy.c $(HEADERS)
+deal_sts.o				:	$(SRC)deal_sts.c $(HEADERS)
+check.o					:	$(SRC)check.c $(HEADERS)
+
 
 clean					:
 							$(RM) $(OBJECTS)

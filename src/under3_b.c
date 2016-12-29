@@ -12,53 +12,53 @@
 
 #include "../include/main.h"
 
-static void		deal3_b_sub(t_operators *op, int arr[])
+static void		deal3_b_sub(t_swstacks *sts, int arr[])
 {
 	if (ft_arr_order(123, arr, 3))		//abc
 	{
-		ft_store_operator(op, RB);
-		ft_store_operator(op, SB);
-		ft_store_operator(op, PA);
-		ft_store_operator(op, PA);
-		ft_store_operator(op, RRB);
-		ft_store_operator(op, PA);
+		ft_op_store_do(sts->op, RB, sts->a, sts->b);
+		ft_op_store_do(sts->op, SB, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
+		ft_op_store_do(sts->op, RRB, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
 	}
 	else if (ft_arr_order(213, arr, 3))	//bac
 	{
-		ft_store_operator(op, RB);
-		ft_store_operator(op, SB);
-		ft_store_operator(op, PA);
-		ft_store_operator(op, RRB);
-		ft_store_operator(op, PA);
-		ft_store_operator(op, PA);
+		ft_op_store_do(sts->op, RB, sts->a, sts->b);
+		ft_op_store_do(sts->op, SB, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
+		ft_op_store_do(sts->op, RRB, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
 	}
 	else if (ft_arr_order(312, arr, 3))	//cab
 	{
-		ft_store_operator(op, PA);
-		ft_store_operator(op, SB);
-		ft_store_operator(op, PA);
-		ft_store_operator(op, PA);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
+		ft_op_store_do(sts->op, SB, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
 	}
 	else if (ft_arr_order(132, arr, 3))	//acb
 	{
-		ft_store_operator(op, SB);
-		ft_store_operator(op, PA);
-		ft_store_operator(op, SB);
-		ft_store_operator(op, PA);
-		ft_store_operator(op, PA);
+		ft_op_store_do(sts->op, SB, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
+		ft_op_store_do(sts->op, SB, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
 	}
 	else if (ft_arr_order(231, arr, 3))	//bca
 	{
-		ft_store_operator(op, SB);
-		ft_store_operator(op, PA);
-		ft_store_operator(op, PA);
-		ft_store_operator(op, PA);
+		ft_op_store_do(sts->op, SB, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
 	}
 	else if (ft_arr_order(321, arr, 3))	//cba
 	{
-		ft_store_operator(op, PA);
-		ft_store_operator(op, PA);
-		ft_store_operator(op, PA);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
 	}
 }
 
@@ -70,18 +70,18 @@ void			under3_b(t_swstacks *sts, int length)
 		return ;
 	ft_stack_to_arr(sts->b, arr, length);
 	if (length == 3)
-		deal3_b_sub(sts->op, arr);
+		deal3_b_sub(sts, arr);
 	else if (length == 2 && arr[1] > arr[0])	//ba
 	{
-		ft_store_operator(sts->op, SB);
-		ft_store_operator(sts->op, PA);
-		ft_store_operator(sts->op, PA);
+		ft_op_store_do(sts->op, SB, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
 	}
 	else if (length == 2)
 	{
-		ft_store_operator(sts->op, PA);
-		ft_store_operator(sts->op, PA);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
 	}
 	else if (length == 1)
-			ft_store_operator(sts->op, PA);
+		ft_op_store_do(sts->op, PA, sts->a, sts->b);
 }
