@@ -68,14 +68,14 @@ void				solve_quick_btoa(t_swstacks *sts, int length);
 /*
 **					solve_quick_sub.c
 */
-int					ft_get_pivot(t_stack *a, size_t length);
-int					ft_get_rbm(t_stack *a, size_t length);
-int					ft_get_ram(t_stack *b, size_t length);
-
+int					ft_get_pivot(t_stack *a, int length);
+int					ft_get_rbm(t_stack *a, int length);
+int					ft_get_ram(t_stack *b, int length);
 t_sw_operator		ra_or_rr(t_swstacks *sts,	t_quick_tool *tool);
 int					ft_rpb(t_swstacks *sts,	t_quick_tool *tool);
+int					ft_rpa(t_swstacks *sts,	t_quick_tool *tool);
+int					rb_or_rr(t_swstacks *sts, t_quick_tool *tool);
 
-// void				ft_rpb(t_swstacks *sts,	int count_b, int rbm);
 
 /*
 **					ftssau_deal.c

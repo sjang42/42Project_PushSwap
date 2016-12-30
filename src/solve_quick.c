@@ -64,6 +64,7 @@ void				solve_quick_atob(t_swstacks *sts, int length)
 		return ;
 	}
 	tool = ft_tool_new_a(sts, length);
+	// printf("pivot of a : %d\n", tool->pivot);
 	i = 0;
 
 	while (i < length && (tool->count_pb < length / 2))

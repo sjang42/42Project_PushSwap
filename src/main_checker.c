@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
 		ft_putstr("OK\n");
 	else
 		ft_putstr("KO\n");
+
 	if (option & OP_SIZE_OPER)
 	{
 		ft_putstr("Size of Instruction : ");

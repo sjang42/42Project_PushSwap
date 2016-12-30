@@ -12,11 +12,11 @@
 
 #include "../include/main.h"
 
-static int		ft_get_midium(t_stack *a, size_t length)
+static int		ft_get_midium(t_stack *a, int length)
 {
 	int				arr[length + 1];
 	t_stack_node	*cur;
-	size_t			i;
+	int			i;
 
 	i = 0;
 	cur = a->head;
@@ -33,16 +33,16 @@ static int		ft_get_midium(t_stack *a, size_t length)
 		return (arr[length / 2]);
 }
 
-int				ft_get_pivot(t_stack *a, size_t length)
+int				ft_get_pivot(t_stack *a, int length)
 {
 	return (ft_get_midium(a, length));
 }
 
-int				ft_get_rbm(t_stack *a, size_t length)
+int				ft_get_rbm(t_stack *a, int length)
 {
 	int				arr[length + 1];
 	t_stack_node	*cur;
-	size_t			i;
+	int				i;
 	int				idx;
 
 	i = 0;
@@ -62,11 +62,11 @@ int				ft_get_rbm(t_stack *a, size_t length)
 		return (arr[idx]);
 }
 
-int				ft_get_ram(t_stack *b, size_t length)
+int					ft_get_ram(t_stack *b, int length)
 {
 	int				arr[length + 1];
 	t_stack_node	*cur;
-	size_t			i;
+	int				i;
 	int				idx;
 
 	i = 0;
@@ -80,13 +80,44 @@ int				ft_get_ram(t_stack *b, size_t length)
 	ft_quicksort(arr, 0, length - 1);
 	idx = length / 2;
 	if (length % 2 != 0)
-		idx += 1;
+	 	idx += 1;
 	idx /= 2;
-	if (length == 0)
-		return (arr[0]);
-	else
-		return (arr[idx]);
+	idx += length / 2;
+	return (arr[idx]);
 }
+
+
+// int				ft_get_ram(t_stack *b, int length)
+// {
+// 	int				arr[length + 1];
+// 	t_stack_node	*cur;
+// 	t_stack			*tmp;
+// 	int				i;
+// 	int				idx;
+// 	int				tmp_pivot;
+
+// 	i = 0;
+// 	cur = b->head;
+// 	while (i < length && cur)
+// 	{
+// 		arr[i] = cur->data;
+// 		cur = cur->next;
+// 		i++;
+// 	}
+// 	ft_quicksort(arr, 0, length - 1);
+// 	tmp_pivot = ft_get_pivot(b, length);
+// 	i = 0;
+// 	while (i < length && arr[i] != tmp_pivot)
+// 		i++;
+// 	tmp = ft_stack_new();
+// 	idx = i + 0;
+// 	while (i < length)
+// 	{
+// 		ft_stack_push(tmp, arr[i]);
+// 		i++;
+// 	}
+// 	return (ft_get_pivot(tmp, length - idx + 1));
+// }
 
 
 // t_sw_operator	ra_or_rr(t_stack *b, int count_b, int rbm)

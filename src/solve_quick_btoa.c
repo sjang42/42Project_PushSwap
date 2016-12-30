@@ -25,7 +25,8 @@ static int			ft_future_rb(t_swstacks *sts, int length)
 	count_rb = 0;
 	count_pa = 0;
 	cur = sts->b->head;
-	while (cur->next && (count_pa < length / 2))
+	while (cur->next && (count_pa < ((length % 2 == 0) ?
+							(length / 2) : (length / 2 + 1))))
 	{
 		if (cur->data >= pivot)
 			count_pa++;
@@ -42,6 +43,7 @@ static t_quick_tool		*ft_tool_new_b(t_swstacks *sts, int length)
 
 	tool = (t_quick_tool *)malloc(sizeof(t_quick_tool));
 	tool->count_pa = 0;
+	tool->count_ra = 0;
 	tool->count_rb = 0;
 	tool->future_rb = ft_future_rb(sts, length);
 	tool->pivot = ft_get_pivot(sts->b, length);
@@ -53,6 +55,7 @@ static t_quick_tool		*ft_tool_new_b(t_swstacks *sts, int length)
 void		solve_quick_btoa(t_swstacks *sts, int length)
 {
 	t_quick_tool	*tool;
+	int				ret_count_pa;
 	int				i;
 
 	if (length <= 3)
@@ -61,6 +64,7 @@ void		solve_quick_btoa(t_swstacks *sts, int length)
 		return ;
 	}
 	tool = ft_tool_new_b(sts, length);
+	// printf("ram : %d\n", tool->ram);
 	i = 0;
 	tool->count_pa = 0;
 	tool->future_rb = ft_future_rb(sts, length);
@@ -69,22 +73,44 @@ void		solve_quick_btoa(t_swstacks *sts, int length)
 	{
 		if (ft_stack_peek(sts->b) >= tool->pivot)
 		{
-			ft_op_store_do(sts->op, PA, sts->a, sts->b);
+			// ft_op_store_do(sts->op, PA, sts->a, sts->b);
+			tool->count_ra += ft_rpa(sts, tool);
 			(tool->count_pa)++;
 		}
 		else
-		{
-			ft_op_store_do(sts->op, RB, sts->a, sts->b);
+		{	
+			if (rb_or_rr(sts, tool) == RR)
+			{
+				ft_op_store_do(sts->op, RR, sts->a, sts->b);
+				(tool->count_ra)++;
+			}
+			else
+				ft_op_store_do(sts->op, RB, sts->a, sts->b);
 			(tool->count_rb)++;
 		}
 		i++;
 	}
+	// printf("tool->count_ra : %d, tool->count_rb: %d\n", tool->count_ra, tool->count_rb);
+
 	while (tool->count_rb && ft_stack_size(sts->b) != length - tool->count_pa)
 	{
-		ft_op_store_do(sts->op, RRB, sts->a, sts->b);
+		if (tool->count_ra > 0)
+		{
+			ft_op_store_do(sts->op, RRR, sts->a, sts->b);
+			(tool->count_ra)--;
+		}
+		else
+			ft_op_store_do(sts->op, RRB, sts->a, sts->b);
 		(tool->count_rb)--;
 	}
-	solve_quick_atob(sts, tool->count_pa);
-	solve_quick_btoa(sts, length - tool->count_pa);
+	while (tool->count_ra > 0)
+	{
+		// printf("%s, len: %d\n", "hi", length);
+		ft_op_store_do(sts->op, RRA, sts->a, sts->b);
+		(tool->count_ra)--;
+	}
+	ret_count_pa = tool->count_pa;
 	free(tool);
+	solve_quick_atob(sts, ret_count_pa);
+	solve_quick_btoa(sts, length - ret_count_pa);
 }
