@@ -19,6 +19,7 @@ OBJECTS					=	usage.o\
 							ft_operators.o\
 							solve_quick.o\
 							solve_quick_sub.o\
+							solve_quick_btoa.o\
 							under3_a.o under3_b.o\
 							main_pushswap.o\
 							stack_sw.o\
@@ -59,6 +60,7 @@ usage.o					:	$(SRC)usage.c $(HEADERS)
 
 solve_quick.o			:	$(SRC)solve_quick.c $(HEADERS)
 solve_quick_sub.o		:	$(SRC)solve_quick_sub.c $(HEADERS)
+solve_quick_btoa.o		:	$(SRC)solve_quick_btoa.c $(HEADERS)
 under3_a.o				:	$(SRC)under3_a.c $(HEADERS)
 under3_b.o				:	$(SRC)under3_b.c $(HEADERS)
 ft_quicksort.o			:	$(SRC)ft_quicksort.c $(HEADERS)

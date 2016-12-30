@@ -26,7 +26,9 @@ typedef struct		s_quick_tool
 	int count_rb;
 	int length;
 	int pivot;
+	int ram;
 	int rbm;
+	int future_rb;
 }					t_quick_tool;
 
 
@@ -68,8 +70,10 @@ void				solve_quick_btoa(t_swstacks *sts, int length);
 */
 int					ft_get_pivot(t_stack *a, size_t length);
 int					ft_get_rbm(t_stack *a, size_t length);
-t_sw_operator		ra_or_rr(t_stack *b, int count_b, int rbm);
-int				ft_rpb(t_swstacks *sts,	t_quick_tool *tool);
+int					ft_get_ram(t_stack *b, size_t length);
+
+t_sw_operator		ra_or_rr(t_swstacks *sts,	t_quick_tool *tool);
+int					ft_rpb(t_swstacks *sts,	t_quick_tool *tool);
 
 // void				ft_rpb(t_swstacks *sts,	int count_b, int rbm);
 

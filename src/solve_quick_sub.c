@@ -62,6 +62,33 @@ int				ft_get_rbm(t_stack *a, size_t length)
 		return (arr[idx]);
 }
 
+int				ft_get_ram(t_stack *b, size_t length)
+{
+	int				arr[length + 1];
+	t_stack_node	*cur;
+	size_t			i;
+	int				idx;
+
+	i = 0;
+	cur = b->head;
+	while (i < length && cur)
+	{
+		arr[i] = cur->data;
+		cur = cur->next;
+		i++;
+	}
+	ft_quicksort(arr, 0, length - 1);
+	idx = length / 2;
+	if (length % 2 != 0)
+		idx += 1;
+	idx /= 2;
+	if (length == 0)
+		return (arr[0]);
+	else
+		return (arr[idx]);
+}
+
+
 // t_sw_operator	ra_or_rr(t_stack *b, int count_b, int rbm)
 // {
 // 	t_stack_node	*cur;
@@ -92,25 +119,6 @@ int				ft_get_rbm(t_stack *a, size_t length)
 // 		return (RA);
 // }
 
-t_sw_operator	ra_or_rr(t_stack *b, int count_pb, int rbm)
-{
-	if (ft_stack_size(b) <= 1)
-		return (RA);
-	if (ft_stack_size(b) == count_pb)
-	{
-		if (ft_stack_peek(b) < rbm)
-			return (RR);
-		else
-			return (RA);
-	}
-	else
-	{
-		if (ft_stack_peek(b) > rbm)
-			return (RR);
-		else
-			return (RA);
-	}
-}
 
 int				ft_stack_last(t_stack *ps)
 {
@@ -145,20 +153,6 @@ static int		rb_or_not(t_swstacks *sts, t_quick_tool *tool)
 		return (0);
 	else
 		return (1);
-	// if (ft_stack_size(sts->b) != tool->count_pb)
-	// {
-	// 	if (ft_stack_peek(sts->b) > tool->rbm)
-	// 		return (1);
-	// 	else
-	// 		return (0);
-	// }
-	// else
-	// {
-	// 	if (ft_stack_peek(b) < tool->rbm)
-	// 		return (1);
-	// 	else
-	// 		return (0);
-	// }
 }
 
 int				ft_rpb(t_swstacks *sts,	t_quick_tool *tool)
@@ -166,29 +160,34 @@ int				ft_rpb(t_swstacks *sts,	t_quick_tool *tool)
 	int count;
 
 	count = 0;
-	count += rb_or_not_first(sts, tool);
-	count += rb_or_not(sts, tool);
+	if (ft_stack_size(sts->b) == tool->count_pb)
+		count += rb_or_not_first(sts, tool);
+	else if (tool->count_rb < tool->future_ra)
+		count += rb_or_not(sts, tool);
 	if (count)
 		ft_op_store_do(sts->op, RB, sts->a, sts->b);
 	ft_op_store_do(sts->op, PB, sts->a, sts->b);
 	return (count);
 }
 
-// int				ft_rpb(t_swstacks *sts,	int count_b, int rbm)
-// {
-// 	int count;
+t_sw_operator	ra_or_rr(t_swstacks *sts, t_quick_tool *tool)
+{
+	if (ft_stack_size(sts->b) <= 1)
+		return (RA);
+	if (ft_stack_size(sts->b) == tool->count_pb)
+	{
+		if (ft_stack_peek(sts->b) < tool->rbm)
+			return (RR);
+		else
+			return (RA);
+	}
+	else if (tool->count_rb < tool->future_ra)
+	{
+		if (ft_stack_peek(sts->b) > tool->rbm)
+			return (RR);
+		else
+			return (RA);
+	}
+	return (RA);
+}
 
-// 	count = 0;
-// 	if (rb_or_not(sts->b, count_b, rbm))
-// 	{
-// 		ft_op_store_do(sts->op, RB, sts->a, sts->b);
-// 	}
-// 	if (ft_stack_size(sts->b) != count_b &&//방금 보낸 건 아니지만 지금 있는게 앞에거보다 클때..
-// 		ft_stack_peek(sts->b) > rbm)
-// 	{
-// 		ft_op_store_do(sts->op, RB, sts->a, sts->b);
-// 		count++;
-// 	}
-// 	ft_op_store_do(sts->op, PB, sts->a, sts->b);
-// 	return (count);
-// }
