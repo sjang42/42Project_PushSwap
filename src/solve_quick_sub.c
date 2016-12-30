@@ -16,7 +16,7 @@ static int		ft_get_midium(t_stack *a, int length)
 {
 	int				arr[length + 1];
 	t_stack_node	*cur;
-	int			i;
+	int				i;
 
 	i = 0;
 	cur = a->head;
@@ -62,7 +62,7 @@ int				ft_get_rbm(t_stack *a, int length)
 		return (arr[idx]);
 }
 
-int					ft_get_ram(t_stack *b, int length)
+int				ft_get_ram(t_stack *b, int length)
 {
 	int				arr[length + 1];
 	t_stack_node	*cur;
@@ -80,145 +80,8 @@ int					ft_get_ram(t_stack *b, int length)
 	ft_quicksort(arr, 0, length - 1);
 	idx = length / 2;
 	if (length % 2 != 0)
-	 	idx += 1;
+		idx += 1;
 	idx /= 2;
 	idx += length / 2;
 	return (arr[idx]);
 }
-
-
-// int				ft_get_ram(t_stack *b, int length)
-// {
-// 	int				arr[length + 1];
-// 	t_stack_node	*cur;
-// 	t_stack			*tmp;
-// 	int				i;
-// 	int				idx;
-// 	int				tmp_pivot;
-
-// 	i = 0;
-// 	cur = b->head;
-// 	while (i < length && cur)
-// 	{
-// 		arr[i] = cur->data;
-// 		cur = cur->next;
-// 		i++;
-// 	}
-// 	ft_quicksort(arr, 0, length - 1);
-// 	tmp_pivot = ft_get_pivot(b, length);
-// 	i = 0;
-// 	while (i < length && arr[i] != tmp_pivot)
-// 		i++;
-// 	tmp = ft_stack_new();
-// 	idx = i + 0;
-// 	while (i < length)
-// 	{
-// 		ft_stack_push(tmp, arr[i]);
-// 		i++;
-// 	}
-// 	return (ft_get_pivot(tmp, length - idx + 1));
-// }
-
-
-// t_sw_operator	ra_or_rr(t_stack *b, int count_b, int rbm)
-// {
-// 	t_stack_node	*cur;
-// 	t_sdata			data_first;
-// 	t_sdata			data_last;
-
-// 	if (ft_stack_size(b) <= 1)
-// 		return (RA);
-// 	cur = b->head;
-// 	data_first = cur->data;
-// 	while (cur->next)
-// 		cur = cur->next;
-// 	data_last = cur->data;
-// 	if (ft_stack_size(b) == count_b &&
-// 		rbm > data_first)
-// 		return (RR);
-// 	else
-// 		return (RA);
-// }
-
-// t_sw_operator	ra_or_rr(t_stack *b, int count_b, int rbm)
-// {
-// 	if (ft_stack_size(b) <= 1 || ft_stack_size(b) != count_b)
-// 		return (RA);
-// 	if (ft_stack_peek(b) < rbm)
-// 		return (RR);
-// 	else
-// 		return (RA);
-// }
-
-
-int				ft_stack_last(t_stack *ps)
-{
-	t_stack_node	*cur;
-
-	cur = ps->head;
-	while (cur->next)
-		cur = cur->next;
-	return (cur->data);
-}
-
-//ft_stack_size(sts->b == count_b에만 적용)
-//작은 것만 뒤로 보냄
-static int		rb_or_not_first(t_swstacks *sts, t_quick_tool *tool)
-{
-	if (ft_stack_size(sts->b) != tool->count_pb ||
-		ft_stack_size(sts->b) <= 1 ||
-		sts->b->head->next->data < tool->rbm ||
-		ft_stack_peek(sts->b) >= tool->rbm)
-		return (0);
-	else
-		return (1);
-}
-//ft_stack_size(sts->b != count_b에만 적용)
-//큰 것만 뒤로 보냄
-static int		rb_or_not(t_swstacks *sts, t_quick_tool *tool)
-{
-	if (ft_stack_size(sts->b) == tool->count_pb ||
-		ft_stack_size(sts->b) <= 1 ||
-		ft_stack_last(sts->b) > tool->rbm ||
-		ft_stack_peek(sts->b) <= tool->rbm)
-		return (0);
-	else
-		return (1);
-}
-
-int				ft_rpb(t_swstacks *sts,	t_quick_tool *tool)
-{
-	int count;
-
-	count = 0;
-	if (ft_stack_size(sts->b) == tool->count_pb)
-		count += rb_or_not_first(sts, tool);
-	else if (tool->count_rb < tool->future_ra)
-		count += rb_or_not(sts, tool);
-	if (count)
-		ft_op_store_do(sts->op, RB, sts->a, sts->b);
-	ft_op_store_do(sts->op, PB, sts->a, sts->b);
-	return (count);
-}
-
-t_sw_operator	ra_or_rr(t_swstacks *sts, t_quick_tool *tool)
-{
-	if (ft_stack_size(sts->b) <= 1)
-		return (RA);
-	if (ft_stack_size(sts->b) == tool->count_pb)
-	{
-		if (ft_stack_peek(sts->b) < tool->rbm)
-			return (RR);
-		else
-			return (RA);
-	}
-	else if (tool->count_rb < tool->future_ra)
-	{
-		if (ft_stack_peek(sts->b) > tool->rbm)
-			return (RR);
-		else
-			return (RA);
-	}
-	return (RA);
-}
-

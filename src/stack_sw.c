@@ -12,58 +12,6 @@
 
 #include "../include/main.h"
 
-static int	get_positional_int_sw(int nb)
-{
-	int positional;
-	int temp;
-
-	positional = 1;
-	temp = nb;
-	while (temp >= 10 || temp <= -10)
-	{
-		temp /= 10;
-		positional *= 10;
-	}
-	return (positional);
-}
-
-int			ft_putnbr_sw(int nb)
-{
-	char	digit;
-	int		positional;
-	int		ret;
-
-	positional = get_positional_int_sw(nb);
-	ret = 0;
-	if (nb < 0)
-	{
-		write(1, "-", 1);
-		positional *= -1;
-		ret++;
-	}
-	while (positional != 0)
-	{
-		digit = nb / positional + '0';
-		write(1, &digit, 1);
-		nb %= positional;
-		positional /= 10;
-		ret++;
-	}
-	return (ret);
-}
-
-void	ft_putstr_wd(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		write(1, str + i, 3);
-		i += 3;
-	}
-}
-
 t_sdata		ft_stack_least(t_stack *pstack)
 {
 	t_stack_node	*cur;
@@ -100,7 +48,7 @@ t_sdata		ft_stack_most(t_stack *pstack)
 	return (most);
 }
 
-void	ft_stack_display(t_stack *pstack)
+void		ft_stack_display(t_stack *pstack)
 {
 	t_stack_node *cur;
 
@@ -134,71 +82,12 @@ int			ft_stack_where_data(t_stack *ps, t_sdata q)
 	return (0);
 }
 
-void	ft_stack_display_cos(t_stack *a, t_stack *b)
+int			ft_stack_last(t_stack *ps)
 {
 	t_stack_node	*cur;
-	int				i;
-	int				count;
 
-	ft_putstr_wd("┌──────────────────────────────────────────────────┐  \n│");
-
-	ft_putstr("    a : ");
-	i = 0;
-	cur = a->head;
-	count = 0;
-	while (cur)
-	{
-		if (i != 0)
-			ft_putstr(", ");
-		if ((count + ft_digitcount(cur->data)) > 40)
-		{
-			count = 42 - count;
-			write(1, "                                              ", count);
-			write(1, "│\n│         ", 15);
-			count = 0;
-		}
-		count += ft_putnbr_sw(cur->data) + 2;
+	cur = ps->head;
+	while (cur->next)
 		cur = cur->next;
-		i++;
-	}
-	if (count)
-	{
-		count = 44 - count;
-		write(1, "                       \
-                                         ", count);
-		write(1, "│                 ", 9);
-		count = 0;
-	}
-	ft_putstr("\n");
-	ft_putstr_wd("├──────────────────────────────────────────────────┤  \n│");
-	ft_putstr("    b : ");
-	i = 0;
-	cur = b->head;
-	count = 0;
-	while (cur)
-	{
-		if (i != 0)
-			ft_putstr(", "); 
-		if ((count + ft_digitcount(cur->data)) > 40)
-		{
-			count = 42 - count;
-			write(1, "                                              ", count);
-			write(1, "│\n│         ", 15);
-			count = 0;
-		}
-		count += ft_putnbr_sw(cur->data) + 2;
-		cur = cur->next;
-		i++;
-	}
-	if (count || i == 0)
-	{
-		count = 42 - count;
-		if (i != 0)
-			count += 2;
-		write(1, "                       \
-                                         ", count);
-		write(1, "│                 ", 9);
-	}
-	ft_putstr("\n");
-	ft_putstr_wd("└──────────────────────────────────────────────────┘  \n");
+	return (cur->data);
 }

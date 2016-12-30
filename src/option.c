@@ -12,7 +12,7 @@
 
 #include "../include/main.h"
 
-t_swoptions ft_get_swoption(char *str)
+t_swoptions		ft_get_swoption(char *str)
 {
 	t_swoptions	ret;
 

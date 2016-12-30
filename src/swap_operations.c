@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/swap_base.h"
 #include "../include/main.h"
 
 static int		sw_operate_rr(t_stack *a, t_stack *b, t_sw_operator op)
@@ -45,7 +44,7 @@ static int		sw_operate_sp(t_stack *a, t_stack *b, t_sw_operator op)
 	else if (op == SS)
 	{
 		sw_swap(a);
-		return(sw_swap(b));
+		return (sw_swap(b));
 	}
 	else if (op == PA)
 		return (sw_push(b, a));
@@ -91,4 +90,3 @@ void			ft_calculate_show(t_stack *a, t_stack *b, t_operators *op)
 		i++;
 	}
 }
-

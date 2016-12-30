@@ -10,6 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+void			ft_op_store_do_show_ch(t_operators *op, t_sw_operator operator,
+								t_stack *a, t_stack *b)
+{
+	ft_store_operator(op, operator);
+	sw_operate(a, b, operator);
+	ft_stack_display_cos(a, b);
+}
+
 t_stack		*ft_stack_dup(t_stack *ps)
 {
 	t_stack			*ret;

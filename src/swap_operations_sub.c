@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/swap_base.h"
-# include "../include/main.h"
+#include "../include/main.h"
 
 int		sw_swap(t_stack *pstack)
 {
@@ -56,7 +55,6 @@ int		sw_rotate_rev(t_stack *pstack)
 	if (ft_stack_isempty(pstack) ||
 		pstack->head->next == NULL)
 		return (0);
-
 	pretail = pstack->head;
 	while (pretail->next != pstack->tail)
 		pretail = pretail->next;

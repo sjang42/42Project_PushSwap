@@ -26,14 +26,14 @@ static int		ft_get_pivot(int arr[], int left, int right)
 	mid = (left + right) / 2;
 	if (arr[left] >= arr[right])
 	{
-		if(arr[left] >= arr[mid])
+		if (arr[left] >= arr[mid])
 			return ((arr[mid] >= arr[right]) ? mid : right);
 		else
 			return (left);
 	}
 	else
 	{
-		if(arr[right] >= arr[mid])
+		if (arr[right] >= arr[mid])
 			return ((arr[mid] >= arr[left]) ? mid : left);
 		else
 			return (right);
@@ -54,7 +54,7 @@ static int		qs_partition(int arr[], int left, int right)
 	high = right;
 	while (low <= high)
 	{
-		while(arr[pivot] >= arr[low] && low <= right)
+		while (arr[pivot] >= arr[low] && low <= right)
 			low++;
 		while (arr[pivot] < arr[high] && high >= left)
 			high--;

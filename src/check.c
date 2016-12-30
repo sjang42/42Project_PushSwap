@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/main.h"
+#include "../include/main.h"
 
 int		ft_check_stack(t_stack *a, t_stack *b)
 {

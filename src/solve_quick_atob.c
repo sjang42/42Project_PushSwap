@@ -12,14 +12,14 @@
 
 #include "../include/main.h"
 
-int					ft_future_ra(t_swstacks *sts, int length)
+static int				ft_future_ra(t_swstacks *sts, int length)
 {
 	int				count_ra;
 	int				count_pb;
 	int				pivot;
 	t_stack_node	*cur;
 
-	if(ft_stack_isempty(sts->b))
+	if (ft_stack_isempty(sts->b))
 		return (0);
 	pivot = ft_get_pivot(sts->a, length);
 	count_ra = 0;
@@ -36,8 +36,7 @@ int					ft_future_ra(t_swstacks *sts, int length)
 	return (count_ra);
 }
 
-
-t_quick_tool		*ft_tool_new_a(t_swstacks *sts, int length)
+static t_quick_tool		*ft_tool_new_a(t_swstacks *sts, int length)
 {
 	t_quick_tool *tool;
 
@@ -53,20 +52,12 @@ t_quick_tool		*ft_tool_new_a(t_swstacks *sts, int length)
 	return (tool);
 }
 
-void				solve_quick_atob(t_swstacks *sts, int length)
+static void				send_half(
+						t_swstacks *sts, t_quick_tool *tool, int length)
 {
-	t_quick_tool *tool;
 	int i;
 
-	if (length <= 3)
-	{
-		under3_a(sts, length);
-		return ;
-	}
-	tool = ft_tool_new_a(sts, length);
-	// printf("pivot of a : %d\n", tool->pivot);
 	i = 0;
-
 	while (i < length && (tool->count_pb < length / 2))
 	{
 		if (ft_stack_peek(sts->a) < tool->pivot)
@@ -76,18 +67,24 @@ void				solve_quick_atob(t_swstacks *sts, int length)
 		}
 		else
 		{
-			// ft_op_store_do(sts->op, ra_or_rr(sts, tool), sts->a, sts->b);
 			if (ra_or_rr(sts, tool) == RR)
 			{
-				ft_op_store_do(sts->op, RR,	sts->a, sts->b);
+				ft_op_store_do(sts->op, RR, sts->a, sts->b);
 				(tool->count_rb)++;
 			}
 			else
-				ft_op_store_do(sts->op, RA,	sts->a, sts->b);
+				ft_op_store_do(sts->op, RA, sts->a, sts->b);
 			(tool->count_ra)++;
 		}
+		i++;
 	}
-	while (tool->count_ra && ft_stack_size(sts->a) != length - tool->count_pb)
+}
+
+static void				restore(
+						t_swstacks *sts, t_quick_tool *tool, int length)
+{
+	while (tool->count_ra &&
+			ft_stack_size(sts->a) != length - tool->count_pb)
 	{
 		if (tool->count_rb > 0)
 		{
@@ -98,15 +95,28 @@ void				solve_quick_atob(t_swstacks *sts, int length)
 			ft_op_store_do(sts->op, RRA, sts->a, sts->b);
 		(tool->count_ra)--;
 	}
-
 	while (tool->count_rb > 0 && ft_stack_size(sts->b) != tool->count_pb)
 	{
 		ft_op_store_do(sts->op, RRB, sts->a, sts->b);
 		(tool->count_rb)--;
 	}
-	solve_quick_atob(sts, length - tool->count_pb);
-	solve_quick_btoa(sts, tool->count_pb);
-	free(tool);
 }
 
+void					solve_quick_atob(t_swstacks *sts, int length)
+{
+	t_quick_tool	*tool;
+	int				count_pb;
 
+	if (length <= 3)
+	{
+		under3_a(sts, length);
+		return ;
+	}
+	tool = ft_tool_new_a(sts, length);
+	send_half(sts, tool, length);
+	restore(sts, tool, length);
+	count_pb = tool->count_pb;
+	free(tool);
+	solve_quick_atob(sts, length - count_pb);
+	solve_quick_btoa(sts, count_pb);
+}
