@@ -110,11 +110,11 @@ t_swoptions			ft_get_swoption(char *str);
 /*
 **					solve_quick_btoa.c
 */
-void				solve_quick_btoa(t_swstacks *sts, int length);
+void				solve_quick_btoa(t_swstacks *sts, int length, int rpb);
 /*
 **					solve_quick_atob.c
 */
-void				solve_quick_atob(t_swstacks *sts, int length);
+void				solve_quick_atob(t_swstacks *sts, int length, int rpb);
 /*
 **					solve_quick_sub.c
 */

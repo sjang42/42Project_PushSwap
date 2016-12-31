@@ -53,21 +53,25 @@ static t_quick_tool		*ft_tool_new_a(t_swstacks *sts, int length)
 }
 
 static void				send_half(
-						t_swstacks *sts, t_quick_tool *tool, int length)
+						t_swstacks *sts, t_quick_tool *tool,
+						int length, int rpb)
 {
 	int i;
 
 	i = 0;
-	while (i < length && (tool->count_pb < length / 2))
+	while (i++ <= length && (tool->count_pb < length / 2))
 	{
 		if (ft_stack_peek(sts->a) < tool->pivot)
 		{
-			tool->count_rb += ft_rpb(sts, tool);
+			if (rpb)
+				tool->count_rb += ft_rpb(sts, tool);
+			else
+				ft_op_store_do(sts->op, PB, sts->a, sts->b);
 			(tool->count_pb)++;
 		}
 		else
 		{
-			if (ra_or_rr(sts, tool) == RR)
+			if (ra_or_rr(sts, tool) == RR && rpb)
 			{
 				ft_op_store_do(sts->op, RR, sts->a, sts->b);
 				(tool->count_rb)++;
@@ -76,12 +80,12 @@ static void				send_half(
 				ft_op_store_do(sts->op, RA, sts->a, sts->b);
 			(tool->count_ra)++;
 		}
-		i++;
 	}
 }
 
 static void				restore(
-						t_swstacks *sts, t_quick_tool *tool, int length)
+						t_swstacks *sts, t_quick_tool *tool,
+						int length)
 {
 	while (tool->count_ra &&
 			ft_stack_size(sts->a) != length - tool->count_pb)
@@ -102,7 +106,8 @@ static void				restore(
 	}
 }
 
-void					solve_quick_atob(t_swstacks *sts, int length)
+void					solve_quick_atob(
+						t_swstacks *sts, int length, int rpb)
 {
 	t_quick_tool	*tool;
 	int				count_pb;
@@ -113,10 +118,10 @@ void					solve_quick_atob(t_swstacks *sts, int length)
 		return ;
 	}
 	tool = ft_tool_new_a(sts, length);
-	send_half(sts, tool, length);
+	send_half(sts, tool, length, rpb);
 	restore(sts, tool, length);
 	count_pb = tool->count_pb;
 	free(tool);
-	solve_quick_atob(sts, length - count_pb);
-	solve_quick_btoa(sts, count_pb);
+	solve_quick_atob(sts, length - count_pb, rpb);
+	solve_quick_btoa(sts, count_pb, rpb);
 }

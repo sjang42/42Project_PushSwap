@@ -44,6 +44,7 @@ int				main(int argc, char *argv[])
 	sts = ft_stsnew(option);
 	ft_get_stack_a(argc, argv, sts);
 	ft_get_operators(sts, option);
+	check_answer(sts);
 	if (option & OP_SIZE_OPER)
 	{
 		ft_putstr("Size of Instruction : ");

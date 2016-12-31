@@ -100,7 +100,7 @@ static void				restore(t_swstacks *sts, t_quick_tool *tool, int length)
 	}
 }
 
-void					solve_quick_btoa(t_swstacks *sts, int length)
+void					solve_quick_btoa(t_swstacks *sts, int length, int rpb)
 {
 	t_quick_tool	*tool;
 	int				count_pa;
@@ -115,6 +115,6 @@ void					solve_quick_btoa(t_swstacks *sts, int length)
 	restore(sts, tool, length);
 	count_pa = tool->count_pa;
 	free(tool);
-	solve_quick_atob(sts, count_pa);
-	solve_quick_btoa(sts, length - count_pa);
+	solve_quick_atob(sts, count_pa, rpb);
+	solve_quick_btoa(sts, length - count_pa, rpb);
 }

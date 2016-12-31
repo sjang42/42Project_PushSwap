@@ -17,6 +17,10 @@ MAKE3					=	./PushSwap
 CLEAN					=	make clean -C
 FCLEAN					=	make fclean -C
 
+ifdef ALLOCWRAP
+	LDFLAGS += $(HOME)/lib/alloc_wrap.c -ldl
+endif 
+
 .PHONY					:	clean fclean re
 
 all						:
