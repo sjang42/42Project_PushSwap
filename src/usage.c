@@ -16,7 +16,8 @@ void		ft_show_usage(void)
 {
 	ft_putstr("Usage 	:	./checker [-option] num1 num2 num3 ...\n");
 	ft_putstr("or		./checker [-option] \"num1 num2 num3 ...\"\n");
-	ft_putstr("Option	:	-s\n");
+	ft_putstr("or		./checker [-f] \"filename\"\n");
+	ft_putstr("Option	:	-s -c -m\n");
 }
 
 void		ft_show_usage_ps(void)

@@ -39,11 +39,8 @@ static void		push_to_a(t_swstacks *sts, char **str)
 			!ft_isint(n) ||
 			ft_stack_where_data(sts->a, n))
 		{
-			if (ft_stack_where_data(sts->a, n))
-			{
-				destroy_split_str(str);
-				ft_destroy_sts_exit(sts);
-			}
+			destroy_split_str(str);
+			ft_destroy_sts_exit(sts);
 		}
 		ft_stack_push(sts->a, (int)n);
 		i--;
