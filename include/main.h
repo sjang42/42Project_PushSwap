@@ -42,6 +42,8 @@ typedef enum		e_swoptions
 	NOTHING = 0,
 	OP_DISPLAY = 1,
 	OP_SIZE_OPER = 2,
+	OP_COLOR = 4,
+	OP_FILE = 8,
 }					t_swoptions;
 
 typedef struct		s_swstacks
@@ -78,17 +80,16 @@ t_swstacks			*ft_stsnew(t_swoptions option);
 **					fill_stack.c
 */
 void				ft_get_stack_a(int argc, char *argv[], t_swstacks *sts);
+void				ft_get_stack_file(char *file, t_swstacks *sts);
 /*
 **					ft_op_store.c
 */
 void				ft_store_operator(
 					t_operators *op, t_sw_operator operator);
 void				ft_op_store_do(
-					t_operators *op, t_sw_operator operator,
-					t_stack *a, t_stack *b);
+					t_swstacks *sts, t_sw_operator operator);
 void				ft_op_store_do_show(
-					t_operators *op, t_sw_operator operator,
-					t_stack *a, t_stack *b);
+					t_swstacks *sts, t_sw_operator operator);
 /*
 **					ft_operators.c
 */

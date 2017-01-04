@@ -66,18 +66,18 @@ static void				send_half(
 			if (rpb)
 				tool->count_rb += ft_rpb(sts, tool);
 			else
-				ft_op_store_do(sts->op, PB, sts->a, sts->b);
+				ft_op_store_do(sts, PB);
 			(tool->count_pb)++;
 		}
 		else
 		{
 			if (ra_or_rr(sts, tool) == RR && rpb)
 			{
-				ft_op_store_do(sts->op, RR, sts->a, sts->b);
+				ft_op_store_do(sts, RR);
 				(tool->count_rb)++;
 			}
 			else
-				ft_op_store_do(sts->op, RA, sts->a, sts->b);
+				ft_op_store_do(sts, RA);
 			(tool->count_ra)++;
 		}
 	}
@@ -92,16 +92,16 @@ static void				restore(
 	{
 		if (tool->count_rb > 0)
 		{
-			ft_op_store_do(sts->op, RRR, sts->a, sts->b);
+			ft_op_store_do(sts, RRR);
 			(tool->count_rb)--;
 		}
 		else
-			ft_op_store_do(sts->op, RRA, sts->a, sts->b);
+			ft_op_store_do(sts, RRA);
 		(tool->count_ra)--;
 	}
 	while (tool->count_rb > 0 && ft_stack_size(sts->b) != tool->count_pb)
 	{
-		ft_op_store_do(sts->op, RRB, sts->a, sts->b);
+		ft_op_store_do(sts, RRB);
 		(tool->count_rb)--;
 	}
 }

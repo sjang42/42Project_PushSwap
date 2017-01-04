@@ -15,6 +15,7 @@ TARGET					=	../checker
 OBJECTS					=	usage.o\
 							option.o\
 							fill_stack.o\
+							fill_stack2.o\
 							get_operators.o\
 							check.o\
 							ft_operators.o\
@@ -51,6 +52,7 @@ swap_operations.o		:	$(SRC)swap_operations.c $(HEADERS)
 swap_operations_sub.o	:	$(SRC)swap_operations_sub.c $(HEADERS)
 check.o					:	$(SRC)check.c $(HEADERS)
 fill_stack.o			:	$(SRC)fill_stack.c $(HEADERS)
+fill_stack2.o			:	$(SRC)fill_stack2.c $(HEADERS)
 ft_op_store.o			:	$(SRC)ft_op_store.c $(HEADERS)
 stack_sw.o				:	$(SRC)stack_sw.c $(HEADERS)
 ft_operators.o			:	$(SRC)ft_operators.c $(HEADERS)

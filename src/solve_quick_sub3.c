@@ -44,8 +44,8 @@ int				ft_rpb(t_swstacks *sts, t_quick_tool *tool)
 	else if (tool->count_rb < tool->future_ra)
 		count += rb_or_not(sts, tool);
 	if (count)
-		ft_op_store_do(sts->op, RB, sts->a, sts->b);
-	ft_op_store_do(sts->op, PB, sts->a, sts->b);
+		ft_op_store_do(sts, RB);
+	ft_op_store_do(sts, PB);
 	return (count);
 }
 
@@ -69,7 +69,7 @@ int				ft_rpa(t_swstacks *sts, t_quick_tool *tool)
 	count = 0;
 	count += ra_or_not(sts, tool);
 	if (count)
-		ft_op_store_do(sts->op, RA, sts->a, sts->b);
-	ft_op_store_do(sts->op, PA, sts->a, sts->b);
+		ft_op_store_do(sts, RA);
+	ft_op_store_do(sts, PA);
 	return (count);
 }

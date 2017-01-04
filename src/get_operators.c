@@ -91,9 +91,9 @@ t_operators				*ft_get_operators(t_swstacks *sts, t_swoptions option)
 		if (!oper)
 			ft_destroy_sts_exit(sts);
 		if (option & OP_DISPLAY)
-			ft_op_store_do_show(sts->op, oper, sts->a, sts->b);
+			ft_op_store_do_show(sts, oper);
 		else
-			ft_op_store_do(sts->op, oper, sts->a, sts->b);
+			ft_op_store_do(sts, oper);
 		free(line);
 	}
 	return (sts->op);

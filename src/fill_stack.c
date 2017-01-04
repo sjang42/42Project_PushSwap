@@ -61,7 +61,7 @@ static void		ft_deal_arg(t_swstacks *sts, char *argv[], int start)
 	destroy_split_str(str);
 }
 
-void			ft_get_stack_a(int argc, char *argv[], t_swstacks *sts)
+static void		ft_get_stack_argv(int argc, char *argv[], t_swstacks *sts)
 {
 	int			i;
 	long long	n;
@@ -83,4 +83,16 @@ void			ft_get_stack_a(int argc, char *argv[], t_swstacks *sts)
 		ft_stack_push(sts->a, (int)n);
 		i--;
 	}
+}
+
+void			ft_get_stack_a(int argc, char *argv[], t_swstacks *sts)
+{
+	if (sts->option & OP_FILE)
+	{
+		if (argc != 3)
+			ft_destroy_sts_exit(sts);
+		ft_get_stack_file(argv[2], sts);
+	}
+	else
+		ft_get_stack_argv(argc, argv, sts);
 }

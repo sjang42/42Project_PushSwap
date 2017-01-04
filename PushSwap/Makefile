@@ -16,6 +16,7 @@ TARGET					=	../push_swap
 OBJECTS					=	usage.o\
 							option.o\
 							fill_stack.o\
+							fill_stack2.o\
 							ft_operators.o\
 							ft_op_store.o\
 							solve_quick_atob.o\
@@ -56,6 +57,7 @@ swap_operations.o		:	$(SRC)swap_operations.c $(HEADERS)
 swap_operations_sub.o	:	$(SRC)swap_operations_sub.c $(HEADERS)
 check.o					:	$(SRC)check.c $(HEADERS)
 fill_stack.o			:	$(SRC)fill_stack.c $(HEADERS)
+fill_stack2.o			:	$(SRC)fill_stack2.c $(HEADERS)
 get_operators.o			:	$(SRC)get_operators.c $(HEADERS)
 stack_sw.o				:	$(SRC)stack_sw.c $(HEADERS)
 stack_show.o			:	$(SRC)stack_show.c $(HEADERS)

@@ -69,11 +69,11 @@ static void				send_half(
 		{
 			if (rb_or_rr(sts, tool) == RR)
 			{
-				ft_op_store_do(sts->op, RR, sts->a, sts->b);
+				ft_op_store_do(sts, RR);
 				(tool->count_ra)++;
 			}
 			else
-				ft_op_store_do(sts->op, RB, sts->a, sts->b);
+				ft_op_store_do(sts, RB);
 			(tool->count_rb)++;
 		}
 		i++;
@@ -86,16 +86,16 @@ static void				restore(t_swstacks *sts, t_quick_tool *tool, int length)
 	{
 		if (tool->count_ra > 0)
 		{
-			ft_op_store_do(sts->op, RRR, sts->a, sts->b);
+			ft_op_store_do(sts, RRR);
 			(tool->count_ra)--;
 		}
 		else
-			ft_op_store_do(sts->op, RRB, sts->a, sts->b);
+			ft_op_store_do(sts, RRB);
 		(tool->count_rb)--;
 	}
 	while (tool->count_ra > 0)
 	{
-		ft_op_store_do(sts->op, RRA, sts->a, sts->b);
+		ft_op_store_do(sts, RRA);
 		(tool->count_ra)--;
 	}
 }
