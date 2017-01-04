@@ -107,6 +107,7 @@ t_operators			*ft_get_operators(t_swstacks *sts, t_swoptions option);
 /*
 **					option.c
 */
+t_swoptions			get_option(int argc, char *argv[]);
 t_swoptions			ft_get_swoption(char *str);
 /*
 **					solve_quick_btoa.c

@@ -39,7 +39,7 @@ int			main(int argc, char *argv[])
 
 	if (argc < 2)
 		return (0);
-	option = NOTHING;
+	option = get_option(argc, argv);
 	sts = ft_stsnew(option);
 	sts2 = ft_stsnew(option);
 	ft_get_stack_a(argc, argv, sts);

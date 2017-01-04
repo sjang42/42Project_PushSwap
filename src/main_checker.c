@@ -20,19 +20,6 @@ void			check_answer(t_swstacks *sts)
 		ft_putstr("KO\n");
 }
 
-t_swoptions		get_option(int argc, char *argv[])
-{
-	t_swoptions	ret;
-
-	ret = ft_get_swoption(argv[1]);
-	if (ret != NOTHING && argc == 2)
-	{
-		ft_show_usage();
-		ft_exit_error(NULL);
-	}
-	return (ret);
-}
-
 int				main(int argc, char *argv[])
 {
 	t_swstacks		*sts;

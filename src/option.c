@@ -55,3 +55,16 @@ t_swoptions		ft_get_swoption(char *str)
 		ft_exit_error(NULL);
 	return (ret);
 }
+
+t_swoptions		get_option(int argc, char *argv[])
+{
+	t_swoptions	ret;
+
+	ret = ft_get_swoption(argv[1]);
+	if (ret != NOTHING && argc == 2)
+	{
+		ft_show_usage();
+		ft_exit_error(NULL);
+	}
+	return (ret);
+}
