@@ -14,6 +14,8 @@ MAKE1					=	./libft
 MAKE2					=	./Checker
 MAKE3					=	./PushSwap
 
+TEST					=	./Mktest
+
 CLEAN					=	make clean -C
 FCLEAN					=	make fclean -C
 
@@ -32,10 +34,15 @@ clean					:
 							$(CLEAN) $(MAKE1)
 							$(CLEAN) $(MAKE2)
 							$(CLEAN) $(MAKE3)
+							$(CLEAN) $(TEST)
 
 fclean					:	clean
 							$(FCLEAN) $(MAKE1)
 							$(FCLEAN) $(MAKE2)
 							$(FCLEAN) $(MAKE3)
+							$(FCLEAN) $(TEST)
+
+test					:	all
+							make -C $(TEST) 
 
 re						:	fclean all

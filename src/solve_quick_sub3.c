@@ -62,10 +62,7 @@ static int		ra_or_not(t_swstacks *sts, t_quick_tool *tool)
 int				ft_rpa(t_swstacks *sts, t_quick_tool *tool)
 {
 	int count;
-	int i;
 
-	i = sts->b->head->data;
-	i = tool->ram;
 	count = 0;
 	count += ra_or_not(sts, tool);
 	if (count)
