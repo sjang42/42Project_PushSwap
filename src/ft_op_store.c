@@ -38,40 +38,35 @@ void			ft_op_store_do(t_swstacks *sts, t_sw_operator operator)
 	sw_operate(sts->a, sts->b, operator);
 }
 
-void			change_color(int n)
+void			change_color(int n, t_sw_operator operator)
 {
-	static int num = 0;
-
 	if (!n)
 	{
 		write(1, "\033[0;m", 6);
 		return ;
 	}
-	if (num == 6)
-		num = 0;
-	if (num == 0)
+	if (operator == RA)
 		write(1, "\033[31;m", 6);
-	if (num == 1)
-		write(1, "\033[32;m", 6);
-	if (num == 2)
-		write(1, "\033[33;m", 6);
-	if (num == 3)
-		write(1, "\033[34;m", 6);
-	if (num == 4)
-		write(1, "\033[35;m", 6);
-	if (num == 5)
+	if (operator == RB)
 		write(1, "\033[36;m", 6);
-	num++;
+	if (operator == RRA || operator == RRB)
+		write(1, "\033[32;m", 6);
+	if (operator == SA || operator == SB)
+		write(1, "\033[33;m", 6);
+	if (operator == PA || operator == PB)
+		write(1, "\033[34;m", 6);
+	if (operator == RR || operator == RRR || operator == SS)
+		write(1, "\033[35;m", 6);
 }
 
 void			ft_op_store_do_show(t_swstacks *sts, t_sw_operator operator)
 {
 	if (sts->option & OP_COLOR)
-		change_color(1);
+		change_color(1, operator);
 	ft_store_operator(sts->op, operator);
 	sw_operate(sts->a, sts->b, operator);
 	ft_show_operator(operator);
 	ft_stack_display_cos(sts->a, sts->b);
 	if (sts->option & OP_COLOR)
-		change_color(0);
+		change_color(0, operator);
 }

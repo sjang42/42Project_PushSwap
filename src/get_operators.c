@@ -41,9 +41,11 @@ static char				*ft_read_one(t_swstacks *sts)
 	size = read(0, buf, 1);
 	if (size == 0)
 		return (NULL);
+	if (buf[0] == '\n')
+		ft_destroy_sts_exit(sts);
 	arr[0] = buf[0];
 	size = read(0, buf, 1);
-	if (size == 0)
+	if (size == 0 || buf[0] == '\n')
 		ft_destroy_sts_exit(sts);
 	arr[1] = buf[0];
 	return (ft_read_one_sub(sts, buf, arr));
