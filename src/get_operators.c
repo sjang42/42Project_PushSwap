@@ -18,13 +18,15 @@ static char				*ft_read_one_sub(
 	int size;
 
 	size = read(0, buf, 1);
+	if (size == 0)
+		ft_destroy_sts_exit(sts);
 	if (buf[0] == '\n')
 		arr[2] = 0;
 	else
 	{
 		arr[2] = buf[0];
 		size = read(0, buf, 1);
-		if (buf[0] != '\n')
+		if (size == 0 || buf[0] != '\n')
 			ft_destroy_sts_exit(sts);
 		arr[3] = 0;
 	}
