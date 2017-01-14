@@ -3,11 +3,11 @@
 A C program that sort data using two stack with limited operation.
 
 ## TOC
-* [What is Push_Swap?](##what-is-Push_Swap)
-* [How do I use it?](##how-do-i-use-it)
-* [How do I test it?](##how-do-i-test-it)
+* [What is Push_Swap?](#what-is-pushswap)
+* [How do I use it?](#how-do-i-use-it)
+* [How do I test it?](#how-do-i-test-it)
 
-## What is Push_Swap?
+## What is PushSwap?
 
 [Push_Swap][1] is an individual project at [42][2] that sort data under a limited condition.
 
@@ -66,7 +66,7 @@ The rule is using only 2 stack with 11 operation described below.
     a : -8, 1, 5, 6, 7
     b :
 
-### How do I use it?
+## How do I use it?
 
 We can make the program `push_swap` and `checker` at the same time.
 
@@ -112,7 +112,7 @@ If you choose `test100.txt` and size 100, call this with -f option:
 
 Enjoy!
 
-[1]: https://github.com/sjang42/42Project_GetNextLine/blob/master/get_next_line.en.pdf
+[1]: https://github.com/sjang42/42Project_PushSwap/blob/master/push_swap.en.pdf
 [2]: http://42.us.org "42 USA"
 [3]: https://github.com/sjang42/42Project_Libft
 [4]: https://en.wikipedia.org/wiki/Sorting_algorithm
