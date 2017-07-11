@@ -7,6 +7,7 @@ A C program that sort data using two stack with limited operation.
 * [개발 환경](#개발-환경)
 * [사용 함수 제한](#사용-함수-제한)
 * [빌드 방법](#빌드-방법)
+* [스크린샷](#스크린샷)
 
 ## PushSwap이란 무엇인가?
 
@@ -168,14 +169,22 @@ A C program that sort data using two stack with limited operation.
 아래 명령은 데이터 [7, 1, -8, 6, 5]를 정렬하기 위해 필요한 명령들 을 출력합니다.
 데이터가 중복되거나 4바이트 이상일 경우 Error를 출력합니다.
 
-	./push_swap 7, 1, -8, 6, 5
+	./push_swap 7 1 -8 6 5
 
 **checker**
 
 아래 명령은 데이터 [7, 1, -8, 6, 5]를 정렬하기 위해 필요한 명령을 출력하고, 그 결과를 check로 확인합니다. *-s* 옵션은 진행 과정을 출력합니다.
 check는 명령의 결과로 수가 정렬된 경우 OK를 출력하고 수가 정렬되지 않은 경우 KO를 출력합니다.
 
-	./push_swap 7, 1, -8, 6, 5 | ./checker -s 7, 1, -8, 6, 5
+	./push_swap 7 1 -8 6 5 | ./checker -s 7 1 -8 6 5
+
+## 스크린샷
+
+숫자 데이터 [3, 1, 9, 2, 7, 5, 10, 8, 4, 6] 정렬 과정
+![숫자 데이터 [3, 1, 9, 2, 7, 5, 10, 8, 4, 6] 정렬 과정](./img/execute.png)
+
+Peer to Peer Correction 결과
+![Peer to Peer Correction 결과](./img/correction.png)
 
 [1]: https://github.com/sjang42/42Project_PushSwap/blob/master/push_swap.en.pdf
 [2]: http://42.us.org "42 USA"
