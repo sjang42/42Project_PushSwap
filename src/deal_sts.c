@@ -12,14 +12,14 @@
 
 #include "../include/main.h"
 
-t_swstacks	*ft_stsnew(t_swoptions option)
+t_swstacks  *ft_stsnew(t_swoptions option)
 {
-	t_swstacks		*sts;
+    t_swstacks      *sts;
 
-	sts = (t_swstacks*)malloc(sizeof(t_swstacks));
-	sts->a = ft_stack_new();
-	sts->b = ft_stack_new();
-	sts->op = ft_operators_new(100);
-	sts->option = option;
-	return (sts);
+    sts = (t_swstacks*)malloc(sizeof(t_swstacks));
+    sts->a = ft_stack_new();
+    sts->b = ft_stack_new();
+    sts->op = ft_operators_new(100);
+    sts->option = option;
+    return (sts);
 }

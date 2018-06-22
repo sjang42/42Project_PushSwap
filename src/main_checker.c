@@ -12,32 +12,32 @@
 
 #include "../include/main.h"
 
-void			check_answer(t_swstacks *sts)
+void            check_answer(t_swstacks *sts)
 {
-	if (ft_check_stack(sts->a, sts->b))
-		ft_putstr("OK\n");
-	else
-		ft_putstr("KO\n");
+    if (ft_check_stack(sts->a, sts->b))
+        ft_putstr("OK\n");
+    else
+        ft_putstr("KO\n");
 }
 
-int				main(int argc, char *argv[])
+int             main(int argc, char *argv[])
 {
-	t_swstacks		*sts;
-	t_swoptions		option;
+    t_swstacks      *sts;
+    t_swoptions     option;
 
-	if (argc < 2)
-		return (0);
-	option = get_option(argc, argv);
-	sts = ft_stsnew(option);
-	ft_get_stack_a(argc, argv, sts);
-	ft_get_operators(sts, option);
-	check_answer(sts);
-	if (option & OP_SIZE_OPER)
-	{
-		ft_putstr("Size of Instruction : ");
-		ft_putnbr(sts->op->idx);
-		ft_putstr("\n");
-	}
-	ft_destroy_sts(sts);
-	return (0);
+    if (argc < 2)
+        return (0);
+    option = get_option(argc, argv);
+    sts = ft_stsnew(option);
+    ft_get_stack_a(argc, argv, sts);
+    ft_get_operators(sts, option);
+    check_answer(sts);
+    if (option & OP_SIZE_OPER)
+    {
+        ft_putstr("Size of Instruction : ");
+        ft_putnbr(sts->op->idx);
+        ft_putstr("\n");
+    }
+    ft_destroy_sts(sts);
+    return (0);
 }

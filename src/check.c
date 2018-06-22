@@ -12,10 +12,10 @@
 
 #include "../include/main.h"
 
-int		ft_check_stack(t_stack *a, t_stack *b)
+int     ft_check_stack(t_stack *a, t_stack *b)
 {
-	if (ft_stack_isempty(b) && ft_stack_issort(a))
-		return (1);
-	else
-		return (0);
+    if (ft_stack_isempty(b) && ft_stack_issort(a))
+        return (1);
+    else
+        return (0);
 }
